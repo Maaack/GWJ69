@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjg2hxxehwny8"]
+
+[ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://addons/maaacks_game_template/base/scenes/Credits/Credits.tscn" id="1_g6tcv"]
+[ext_resource type="Script" path="res://scenes/Credits/Credits.gd" id="2_il4pa"]
+
+[node name="Credits" instance=ExtResource("1_g6tcv")]
+script = ExtResource("2_il4pa")
+attribution_file_path = "res://ATTRIBUTION.md"
+scroll_active = true
+
+[node name="HeaderSpace" parent="ScrollContainer/VBoxContainer" index="0"]
+custom_minimum_size = Vector2(0, 648)
+
+[node name="CreditsLabel" parent="ScrollContainer/VBoxContainer" index="1"]
+custom_minimum_size = Vector2(1152, 0)
+text = "[center]
+[font_size=48]Collaborators[/font_size]
+
+[font_size=32]Programming / Design[/font_size]
+[url=https://maaack.itch.io/]Maaack[/url]  
+
+[font_size=32]Music[/font_size]
+[url=https://www.jonhatchmusic.com/]Jon Hatch[/url]  
+
+[font_size=48]Sourced / Unaffiliated[/font_size]
+[font_size=32]Black Hole Shader[/font_size]
+Author: [url=https://github.com/celyk]Celyk[/url]  
+Source: [url=https://godotshaders.com/author/celyk/]godotshaders.com[/url]  
+License: [url=https://creativecommons.org/licenses/by/4.0/deed.en]CC BY 4.0 DEED[/url]  
+
+[font_size=32]Godot Wild Jam Logos[/font_size]
+Author: [url=https://coreyaroberts.com/]Dawk[/url]  
+Source: [url=https://godotwildjam.com/branding/]godotwildjam.com[/url]  
+License: Copyrighted
+
+[font_size=48]Tools[/font_size]
+[font_size=24]Godot[/font_size]
+Author: [url=https://godotengine.org/contact]Juan Linietsky, Ariel Manzur, and contributors[/url]  
+Source: [url=https://godotengine.org/]godotengine.org[/url]  
+License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT License[/url] 
+
+[font_size=24]Git[/font_size]
+Author: [url=https://github.com/torvalds]Linus Torvalds[/url]  
+Source: [url=https://git-scm.com/downloads]git-scm.com[/url]  
+License: [url=https://opensource.org/licenses/GPL-2.0]GNU General Public License version 2[/url]
+
+[font_size=24]Godot Game Template[/font_size]
+Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]  
+Source: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]  
+License: [url=LICENSE.txt]MIT License[/url]  
+[/center]"
+
+[node name="FooterSpace" parent="ScrollContainer/VBoxContainer" index="2"]
+custom_minimum_size = Vector2(0, 648)
