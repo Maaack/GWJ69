@@ -7,7 +7,7 @@
 ### Music
 [Jon Hatch](https://www.jonhatchmusic.com/)  
 
-## Sourced / Unaffiliated
+## Sourced
 ### Black Hole Shader
 Author: [Celyk](https://github.com/celyk)  
 Source: [godotshaders.com](https://godotshaders.com/author/celyk/)  
