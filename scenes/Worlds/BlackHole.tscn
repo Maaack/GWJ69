@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://djjs0ycv4u1tm"]
+
+[ext_resource type="Shader" path="res://assets/shaders/black_hole.gdshader" id="1_7yxq3"]
+[ext_resource type="Script" path="res://scenes/Worlds/BlackHole.gd" id="2_vv5t8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ug5iv"]
+flip_faces = true
+radius = 2.0
+height = 4.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g2p7y"]
+resource_local_to_scene = true
+noise_type = 2
+frequency = 0.0081
+fractal_gain = 0.41
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ey3ui"]
+resource_local_to_scene = true
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource("FastNoiseLite_g2p7y")
+
+[sub_resource type="Curve" id="Curve_5uhy3"]
+_data = [Vector2(0.10219, 1), 0.0, -10.9174, 0, 0, Vector2(0.355231, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 2.72934, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fq86l"]
+resource_local_to_scene = true
+curve = SubResource("Curve_5uhy3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o3ii4"]
+render_priority = 0
+shader = ExtResource("1_7yxq3")
+shader_parameter/energy = 4.0
+shader_parameter/color = Color(1, 0.2, 0, 1)
+shader_parameter/hole_color = Color(0, 0, 0, 1)
+shader_parameter/rim = 0.1
+shader_parameter/proximity_fade = 0.3
+shader_parameter/accretion_radius_inner = 1.0
+shader_parameter/accretion_radius_outer = 7.0
+shader_parameter/lensing_radius = 0.25
+shader_parameter/lensing_falloff = 1.0
+shader_parameter/lensing_strength = 1.0
+shader_parameter/uv_mul = Vector2(3, 1)
+shader_parameter/uv_add = Vector2(0.2, 0)
+shader_parameter/accretion_disk = SubResource("NoiseTexture2D_ey3ui")
+shader_parameter/errosion_ramp = SubResource("CurveTexture_fq86l")
+
+[node name="BlackHole" type="MeshInstance3D"]
+transform = Transform3D(0.436272, 0, 0.899815, 0, 1, 0, -0.899815, 0, 0.436272, 0, 0, 0)
+mesh = SubResource("SphereMesh_ug5iv")
+surface_material_override/0 = SubResource("ShaderMaterial_o3ii4")
+script = ExtResource("2_vv5t8")
+rotation_speed = 0.22
