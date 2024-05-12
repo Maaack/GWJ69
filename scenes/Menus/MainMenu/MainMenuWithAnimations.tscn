@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cl3m5kduf8p41"]
+[gd_scene load_steps=17 format=3 uid="uid://cl3m5kduf8p41"]
 
-[ext_resource type="PackedScene" path="res://scenes/Menus/MainMenu/MainMenu.tscn" id="1_ivjft"]
+[ext_resource type="PackedScene" uid="uid://d3uv8a6plci33" path="res://scenes/Menus/MainMenu/MainMenu.tscn" id="1_ivjft"]
 [ext_resource type="Script" path="res://scenes/Menus/MainMenu/MainMenuWithAnimations.gd" id="2_e2khl"]
+[ext_resource type="PackedScene" uid="uid://bp1c64owlukjd" path="res://scenes/Worlds/World.tscn" id="3_51dw6"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "Intro"
@@ -360,7 +361,24 @@ tree_root = SubResource("AnimationNodeStateMachine_vikuh")
 anim_player = NodePath("../MenuAnimationPlayer")
 parameters/conditions/intro_done = false
 
-[node name="VersionNameLabel" parent="." index="5"]
+[node name="BackgroundMusicPlayer" parent="." index="3"]
+bus = &"Master"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." index="5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" index="0"]
+size = Vector2i(1152, 648)
+
+[node name="World" parent="SubViewportContainer/SubViewport" index="0" instance=ExtResource("3_51dw6")]
+
+[node name="VersionNameLabel" parent="." index="6"]
 modulate = Color(1, 1, 1, 0)
 
 [node name="Title" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="0"]
