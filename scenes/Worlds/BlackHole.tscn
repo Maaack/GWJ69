@@ -48,7 +48,7 @@ shader_parameter/accretion_disk = SubResource("NoiseTexture2D_ey3ui")
 shader_parameter/errosion_ramp = SubResource("CurveTexture_fq86l")
 
 [node name="BlackHole" type="MeshInstance3D"]
-transform = Transform3D(0.436272, 0, 0.899815, 0, 1, 0, -0.899815, 0, 0.436272, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("SphereMesh_ug5iv")
 surface_material_override/0 = SubResource("ShaderMaterial_o3ii4")
 script = ExtResource("2_vv5t8")
