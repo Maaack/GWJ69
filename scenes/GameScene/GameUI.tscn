@@ -1,15 +1,41 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmv8sswk6pfvc"]
+[gd_scene load_steps=15 format=3 uid="uid://bmv8sswk6pfvc"]
 
 [ext_resource type="Script" path="res://scenes/GameScene/GameUI.gd" id="1_jnhpe"]
-[ext_resource type="PackedScene" path="res://scenes/WinScreen/WinScreen.tscn" id="2_vj612"]
-[ext_resource type="PackedScene" path="res://scenes/LoseScreen/LoseScreen.tscn" id="3_hi21a"]
+[ext_resource type="PackedScene" uid="uid://ca1yyin1kgjlr" path="res://scenes/WinScreen/WinScreen.tscn" id="2_vj612"]
+[ext_resource type="PackedScene" uid="uid://phxpbd0sgit8" path="res://scenes/LoseScreen/LoseScreen.tscn" id="3_hi21a"]
 [ext_resource type="Script" path="res://addons/maaacks_game_template/extras/scripts/PauseMenuController.gd" id="4_23cc5"]
-[ext_resource type="PackedScene" path="res://scenes/Menus/PauseMenu/PauseMenu.tscn" id="5_gwwh7"]
-[ext_resource type="Script" path="res://addons/maaacks_game_template/extras/scripts/LevelLoader.gd" id="6_ly60d"]
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="7_kv7nd"]
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/LoadingScreen/LoadingScreen.tscn" id="8_k77ut"]
+[ext_resource type="Shader" path="res://assets/shaders/nebula.gdshader" id="4_li3o2"]
+[ext_resource type="PackedScene" uid="uid://d2ppfg1ro8tf0" path="res://scenes/Menus/PauseMenu/PauseMenu.tscn" id="5_gwwh7"]
+[ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/maaacks_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="7_kv7nd"]
 [ext_resource type="Script" path="res://scenes/GameScene/ConfigurableSubViewport.gd" id="9_88l22"]
+[ext_resource type="PackedScene" uid="uid://cqakivanb4kwd" path="res://scenes/Worlds/GameWorld.tscn" id="9_118j6"]
 [ext_resource type="Script" path="res://scenes/GameScene/InputDisplayLabel.gd" id="10_tfa3m"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0s8hw"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6a7il"]
+seamless = true
+noise = SubResource("FastNoiseLite_0s8hw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c260h"]
+shader = ExtResource("4_li3o2")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.04
+shader_parameter/colour_muiltiplier = Color(1, 1, 1, 1)
+shader_parameter/colour_muiltiplier2 = Color(1, 1, 1, 1)
+shader_parameter/brightness = 1.0
+shader_parameter/clouds_resolution = 3.0
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 0.5
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.5
+shader_parameter/movement = 1.03
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.01
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_6a7il")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_q6rk4"]
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -22,20 +48,22 @@ script = ExtResource("1_jnhpe")
 win_scene = ExtResource("2_vj612")
 lose_scene = ExtResource("3_hi21a")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_c260h")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_q6rk4")
+expand_mode = 1
+
 [node name="PauseMenuController" type="Node" parent="."]
 script = ExtResource("4_23cc5")
 pause_menu_packed = ExtResource("5_gwwh7")
 
-[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_container")]
-script = ExtResource("6_ly60d")
-level_container = NodePath("../ViewportContainer/ConfigurableSubViewport")
-files = Array[String](["res://scenes/GameScene/Levels/Level1.tscn", "res://scenes/GameScene/Levels/Level2.tscn", "res://scenes/GameScene/Levels/Level3.tscn"])
-directory = "res://scenes/GameScene/Levels"
-
 [node name="BackgroundMusicPlayer" parent="." instance=ExtResource("7_kv7nd")]
-
-[node name="LoadingScreen" parent="." instance=ExtResource("8_k77ut")]
-visible = false
 
 [node name="ViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
@@ -47,12 +75,15 @@ grow_vertical = 2
 stretch = true
 
 [node name="ConfigurableSubViewport" type="SubViewport" parent="ViewportContainer"]
+transparent_bg = true
 handle_input_locally = false
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
-size = Vector2i(1280, 720)
+size = Vector2i(1152, 648)
 render_target_update_mode = 4
 script = ExtResource("9_88l22")
+
+[node name="GameWorld" parent="ViewportContainer/ConfigurableSubViewport" instance=ExtResource("9_118j6")]
 
 [node name="InputDisplayLabel" type="Label" parent="."]
 layout_mode = 1
@@ -69,6 +100,33 @@ horizontal_alignment = 1
 autowrap_mode = 2
 script = ExtResource("10_tfa3m")
 
-[connection signal="level_load_started" from="LevelLoader" to="." method="_on_level_loader_level_load_started"]
-[connection signal="level_loaded" from="LevelLoader" to="." method="_on_level_loader_level_loaded"]
-[connection signal="levels_finished" from="LevelLoader" to="." method="_on_level_loader_levels_finished"]
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.411765)
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Booting Rescuer Interface 
+v2.25.13 (build-STTUM013499)
+
+Please stand by..."
+horizontal_alignment = 1
+vertical_alignment = 1

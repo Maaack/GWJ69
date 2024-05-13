@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqakivanb4kwd"]
+
+[ext_resource type="PackedScene" uid="uid://djjs0ycv4u1tm" path="res://scenes/Worlds/BlackHole.tscn" id="1_pookx"]
+[ext_resource type="Shader" path="res://assets/shaders/nebula.gdshader" id="2_1ru7i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lc3qt"]
+shader = ExtResource("2_1ru7i")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.04
+shader_parameter/colour_muiltiplier = Color(1, 1, 1, 1)
+shader_parameter/colour_muiltiplier2 = Color(1, 1, 1, 1)
+shader_parameter/brightness = 1.0
+shader_parameter/clouds_resolution = 3.0
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 0.5
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.5
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.01
+
+[sub_resource type="Sky" id="Sky_cdy1i"]
+sky_material = SubResource("ShaderMaterial_lc3qt")
+
+[sub_resource type="Environment" id="Environment_ybotf"]
+sky = SubResource("Sky_cdy1i")
+
+[node name="GameWorld" type="Node3D"]
+
+[node name="BlackHole" parent="." instance=ExtResource("1_pookx")]
+transform = Transform3D(-0.895233, 0, 0.445599, 0, 1, 0, -0.445599, 0, -0.895233, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999999, 0.000105645, -0.00177931, 0, 0.998242, 0.0592697, 0.00178244, -0.0592696, 0.99824, -0.0153619, 0.511713, 8.61844)
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ybotf")
