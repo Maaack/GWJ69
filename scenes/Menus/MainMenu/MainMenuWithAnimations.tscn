@@ -394,8 +394,7 @@ theme_override_constants/separation = 32
 
 [node name="Title" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="0"]
 modulate = Color(1, 1, 1, 0)
-text = "Infinite Horizon 
-Rescue"
+text = "Infinite Horizon"
 horizontal_alignment = 2
 
 [node name="SubTitle" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="1"]
