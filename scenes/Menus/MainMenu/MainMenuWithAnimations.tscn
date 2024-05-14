@@ -374,19 +374,33 @@ grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" index="0"]
+handle_input_locally = false
 size = Vector2i(1152, 648)
+render_target_update_mode = 4
 
 [node name="World" parent="SubViewportContainer/SubViewport" index="0" instance=ExtResource("3_51dw6")]
 
 [node name="VersionNameLabel" parent="." index="6"]
 modulate = Color(1, 1, 1, 0)
 
+[node name="TitlesMargin" parent="MenuContainer/VBoxContainer" index="0"]
+theme_override_constants/margin_left = 32
+
 [node name="Title" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="0"]
 modulate = Color(1, 1, 1, 0)
+text = "Infinite Horizon"
+horizontal_alignment = 0
 
 [node name="SubTitle" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="1"]
 modulate = Color(1, 1, 1, 0)
+text = "Rescue Attempt"
+horizontal_alignment = 0
+
+[node name="MenuMargin" parent="MenuContainer/VBoxContainer" index="1"]
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_bottom = 64
 
 [node name="MenuButtons" parent="MenuContainer/VBoxContainer/MenuMargin" index="0"]
 modulate = Color(1, 1, 1, 0)
+size_flags_horizontal = 0
 lock = true

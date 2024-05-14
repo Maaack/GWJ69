@@ -1,0 +1,20 @@
+[gd_resource type="Environment" load_steps=5 format=3 uid="uid://cb8ah5k7lnh1y"]
+
+[ext_resource type="Shader" path="res://assets/shaders/sky_tile.gdshader" id="1_isp0r"]
+[ext_resource type="Texture2D" uid="uid://deqjaiyb0mnda" path="res://assets/images/42286446581-cb7fc40351-o.webp" id="2_67may"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7dop7"]
+shader = ExtResource("1_isp0r")
+shader_parameter/energy = 1.0
+shader_parameter/gamma = 1.4
+shader_parameter/scale = 1.455
+shader_parameter/triplanar_blend_power = 4.0
+shader_parameter/seamless_blend = 0.1
+shader_parameter/sky_tex = ExtResource("2_67may")
+
+[sub_resource type="Sky" id="Sky_t7vj6"]
+sky_material = SubResource("ShaderMaterial_7dop7")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_t7vj6")

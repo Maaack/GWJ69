@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d2ppfg1ro8tf0" path="res://scenes/Menus/PauseMenu/PauseMenu.tscn" id="5_gwwh7"]
 [ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/maaacks_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="7_kv7nd"]
 [ext_resource type="Script" path="res://scenes/GameScene/ConfigurableSubViewport.gd" id="9_88l22"]
-[ext_resource type="PackedScene" uid="uid://cqakivanb4kwd" path="res://scenes/Worlds/GameWorld.tscn" id="9_118j6"]
+[ext_resource type="PackedScene" uid="uid://bhq0r3qqbxofl" path="res://scenes/Worlds/GameWorld.tscn" id="9_118j6"]
 [ext_resource type="Script" path="res://scenes/GameScene/InputDisplayLabel.gd" id="10_tfa3m"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0s8hw"]
@@ -109,7 +109,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.411765)
 
-[node name="HUD" type="Control" parent="."]
+[node name="HUD" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

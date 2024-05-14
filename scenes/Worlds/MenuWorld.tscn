@@ -1,17 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp1c64owlukjd"]
+[gd_scene load_steps=7 format=3 uid="uid://bp1c64owlukjd"]
 
 [ext_resource type="PackedScene" uid="uid://djjs0ycv4u1tm" path="res://scenes/Worlds/BlackHole.tscn" id="1_rli72"]
+[ext_resource type="Material" uid="uid://b0mrle8kix5ro" path="res://scenes/Worlds/StarSphereParticleProcess.tres" id="2_lpf1i"]
+[ext_resource type="Environment" uid="uid://cb8ah5k7lnh1y" path="res://scenes/Worlds/MenuEnvironment.tres" id="3_ggbvi"]
+[ext_resource type="Script" path="res://scenes/Worlds/SkyRotationController.gd" id="5_2ugun"]
 
-[sub_resource type="Environment" id="Environment_ybotf"]
-background_mode = 1
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6wo3v"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_e3n24"]
+material = SubResource("StandardMaterial3D_6wo3v")
+radius = 0.05
+height = 0.1
+radial_segments = 16
+rings = 8
 
 [node name="MenuWorld" type="Node3D"]
 
 [node name="BlackHole" parent="." instance=ExtResource("1_rli72")]
+transform = Transform3D(0.989877, 0, 0.141927, 0, 1, 0, -0.141927, 0, 0.989877, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.307322, -0.0970266, -0.946646, 0, 0.994788, -0.101961, 0.951606, 0.0313349, 0.30572, -0.261609, 0.0339581, 2.17623)
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(0.0810284, -0.161967, -0.983464, 0, 0.986708, -0.162502, 0.996711, 0.0131672, 0.0799514, -0.0517685, -0.966698, 0.774355)
 current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ybotf")
+environment = ExtResource("3_ggbvi")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 1000
+lifetime = 600.0
+speed_scale = 0.01
+explosiveness = 1.0
+visibility_aabb = AABB(-39.9443, -40.0504, -39.779, 80.029, 80.077, 79.8021)
+process_material = ExtResource("2_lpf1i")
+draw_pass_1 = SubResource("SphereMesh_e3n24")
+
+[node name="SkyRotationController" type="Node" parent="." node_paths=PackedStringArray("camera_node", "world_environment")]
+script = ExtResource("5_2ugun")
+rotation_speed = 1.0
+camera_node = NodePath("../Camera3D2")
+world_environment = NodePath("../WorldEnvironment")
