@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://qpcqlhjdngti"]
+[gd_scene load_steps=8 format=3 uid="uid://qpcqlhjdngti"]
 
 [ext_resource type="Shader" path="res://assets/shaders/chromatic_abberation.gdshader" id="1_n37hj"]
+[ext_resource type="Script" path="res://scenes/HUD/HUD.gd" id="2_5wier"]
+[ext_resource type="PackedScene" uid="uid://cim7s3ldpnh8t" path="res://scenes/HUD/HUDPanel.tscn" id="2_km8a4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d6wex"]
 shader = ExtResource("1_n37hj")
@@ -8,7 +10,95 @@ shader_parameter/r_displacement = Vector2(3, 0)
 shader_parameter/g_displacement = Vector2(0, 0)
 shader_parameter/b_displacement = Vector2(-3, 0)
 
-[node name="HUD" type="Control"]
+[sub_resource type="Animation" id="Animation_b0mcf"]
+resource_name = "Booting"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["Booting Rescuer Interface 
+v2.25.13 (build-STTUM013499)
+
+Please stand by", "Booting Rescuer Interface 
+v2.25.13 (build-STTUM013499)
+
+Please stand by.", "Booting Rescuer Interface 
+v2.25.13 (build-STTUM013499)
+
+Please stand by..", "Booting Rescuer Interface 
+v2.25.13 (build-STTUM013499)
+
+Please stand by...", "Booting Rescuer Interface 
+v2.25.13 (build-STTUM013499)
+
+Please stand by", "Booting Rescuer Interface 
+v2.25.13 (build-STTUM013499)
+
+Please stand by.", "Booting Rescuer Interface 
+v2.25.13 (build-STTUM013499)
+
+Please stand by..", "Booting Rescuer Interface 
+v2.25.13 (build-STTUM013499)
+
+Please stand by...", ""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_q14gu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Booting Rescuer Interface 
+v2.25.13 (build-STTUM013499)
+
+Please stand by..."]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5cohx"]
+_data = {
+"Booting": SubResource("Animation_b0mcf"),
+"RESET": SubResource("Animation_q14gu")
+}
+
+[node name="HUD" type="Control" node_paths=PackedStringArray("hud_panels")]
 material = SubResource("ShaderMaterial_d6wex")
 layout_mode = 3
 anchors_preset = 15
@@ -16,6 +106,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_5wier")
+hud_panels = [NodePath("VBoxContainer/HBoxContainer/HUDPanel"), NodePath("VBoxContainer/HBoxContainer/HUDPanel2"), NodePath("VBoxContainer/HBoxContainer2/HUDPanel"), NodePath("VBoxContainer/HBoxContainer2/HUDPanel2")]
+panel_boot_delay = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -25,9 +118,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-text = "farts"
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="HUDPanel" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_km8a4")]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HUDPanel2" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_km8a4")]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="HUDPanel" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("2_km8a4")]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HUDPanel2" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("2_km8a4")]
+layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -53,3 +177,9 @@ v2.25.13 (build-STTUM013499)
 Please stand by..."
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5cohx")
+}
+autoplay = "Booting"
