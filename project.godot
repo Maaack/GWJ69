@@ -26,6 +26,10 @@ ProjectUISoundController="*res://addons/maaacks_game_template/base/scenes/Autolo
 
 enabled=PackedStringArray("res://addons/maaacks_game_template/plugin.cfg")
 
+[gui]
+
+theme/custom="res://scenes/Themes/MainTheme.tres"
+
 [input]
 
 ui_accept={
@@ -59,6 +63,11 @@ ui_page_down={
 
 disable_plugin_dialogues=true
 copy_path="res://"
+
+[physics]
+
+3d/default_gravity=0.0
+3d/default_gravity_vector=Vector3(0, 0, 0)
 
 [rendering]
 
