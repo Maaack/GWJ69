@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bmv8sswk6pfvc"]
+[gd_scene load_steps=22 format=3 uid="uid://bmv8sswk6pfvc"]
 
 [ext_resource type="Script" path="res://scenes/GameScene/GameUI.gd" id="1_jnhpe"]
 [ext_resource type="PackedScene" uid="uid://ca1yyin1kgjlr" path="res://scenes/WinScreen/WinScreen.tscn" id="2_vj612"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" path="res://assets/shaders/nebula.gdshader" id="4_li3o2"]
 [ext_resource type="PackedScene" uid="uid://d2ppfg1ro8tf0" path="res://scenes/Menus/PauseMenu/PauseMenu.tscn" id="5_gwwh7"]
 [ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/maaacks_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="7_kv7nd"]
+[ext_resource type="AudioStream" uid="uid://cvnlj8owph6u8" path="res://assets/music/Horizon_loop.mp3" id="8_cu7d1"]
 [ext_resource type="Script" path="res://scenes/GameScene/ConfigurableSubViewport.gd" id="9_88l22"]
 [ext_resource type="PackedScene" uid="uid://bhq0r3qqbxofl" path="res://scenes/Worlds/GameWorld.tscn" id="9_118j6"]
 [ext_resource type="Script" path="res://scenes/GameScene/InputDisplayLabel.gd" id="10_tfa3m"]
@@ -181,6 +182,7 @@ script = ExtResource("4_23cc5")
 pause_menu_packed = ExtResource("5_gwwh7")
 
 [node name="BackgroundMusicPlayer" parent="." instance=ExtResource("7_kv7nd")]
+stream = ExtResource("8_cu7d1")
 
 [node name="ViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
