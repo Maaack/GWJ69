@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://cl3m5kduf8p41"]
+[gd_scene load_steps=18 format=3 uid="uid://cl3m5kduf8p41"]
 
 [ext_resource type="PackedScene" uid="uid://d3uv8a6plci33" path="res://scenes/Menus/MainMenu/MainMenu.tscn" id="1_ivjft"]
 [ext_resource type="Script" path="res://scenes/Menus/MainMenu/MainMenuWithAnimations.gd" id="2_e2khl"]
+[ext_resource type="Theme" uid="uid://23pdc2r50pw1" path="res://scenes/Themes/MainTheme.tres" id="2_qlbkb"]
 [ext_resource type="PackedScene" uid="uid://bp1c64owlukjd" path="res://scenes/Worlds/MenuWorld.tscn" id="3_51dw6"]
 
 [sub_resource type="Animation" id="1"]
@@ -349,6 +350,7 @@ transitions = ["Intro", "OpenMainMenu", SubResource("11"), "OpenMainMenu", "Open
 graph_offset = Vector2(-180.277, 49)
 
 [node name="MainMenu" instance=ExtResource("1_ivjft")]
+theme = ExtResource("2_qlbkb")
 script = ExtResource("2_e2khl")
 
 [node name="MenuAnimationPlayer" type="AnimationPlayer" parent="." index="1"]
@@ -385,22 +387,29 @@ modulate = Color(1, 1, 1, 0)
 
 [node name="TitlesMargin" parent="MenuContainer/VBoxContainer" index="0"]
 theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+
+[node name="TitlesContainer" parent="MenuContainer/VBoxContainer/TitlesMargin" index="0"]
+theme_override_constants/separation = 32
 
 [node name="Title" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="0"]
 modulate = Color(1, 1, 1, 0)
-text = "Infinite Horizon"
-horizontal_alignment = 0
+text = "Infinite Horizon 
+Rescue"
+horizontal_alignment = 2
 
 [node name="SubTitle" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="1"]
 modulate = Color(1, 1, 1, 0)
-text = "Rescue Attempt"
-horizontal_alignment = 0
+text = "GWJ #69 Nice Edition"
+horizontal_alignment = 2
 
 [node name="MenuMargin" parent="MenuContainer/VBoxContainer" index="1"]
 theme_override_constants/margin_left = 32
-theme_override_constants/margin_bottom = 64
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 80
 
 [node name="MenuButtons" parent="MenuContainer/VBoxContainer/MenuMargin" index="0"]
 modulate = Color(1, 1, 1, 0)
-size_flags_horizontal = 0
+size_flags_horizontal = 8
 lock = true
