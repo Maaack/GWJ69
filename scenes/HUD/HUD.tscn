@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://qpcqlhjdngti"]
+
+[ext_resource type="Shader" path="res://assets/shaders/chromatic_abberation.gdshader" id="1_n37hj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d6wex"]
+shader = ExtResource("1_n37hj")
+shader_parameter/r_displacement = Vector2(3, 0)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(-3, 0)
+
+[node name="HUD" type="Control"]
+material = SubResource("ShaderMaterial_d6wex")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Booting Rescuer Interface 
+v2.25.13 (build-STTUM013499)
+
+Please stand by..."
+horizontal_alignment = 1
+vertical_alignment = 1

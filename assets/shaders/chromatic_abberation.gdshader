@@ -8,9 +8,11 @@ uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 
 void fragment()
 {
-	float r = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE*r_displacement), 0.0).r;
-	float g = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE*g_displacement), 0.0).g;
-	float b = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE*b_displacement), 0.0).b;
+	vec4 current = texture(TEXTURE, UV);
+	vec4 r_displaced = texture(TEXTURE, UV + vec2(TEXTURE_PIXEL_SIZE*r_displacement), 0.0);
+	vec4 g_displaced = texture(TEXTURE, UV + vec2(TEXTURE_PIXEL_SIZE*g_displacement), 0.0);
+	vec4 b_displaced = texture(TEXTURE, UV + vec2(TEXTURE_PIXEL_SIZE*b_displacement), 0.0);
+	float alpha = min(1.0, current.a + r_displaced.a + g_displaced.a + b_displaced.a);
 	
-	COLOR = vec4(r, g, b, 1.0);
+	COLOR = vec4(r_displaced.r, g_displaced.g, b_displaced.b, alpha);
 }

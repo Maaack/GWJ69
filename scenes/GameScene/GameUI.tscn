@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bmv8sswk6pfvc"]
+[gd_scene load_steps=18 format=3 uid="uid://bmv8sswk6pfvc"]
 
 [ext_resource type="Script" path="res://scenes/GameScene/GameUI.gd" id="1_jnhpe"]
 [ext_resource type="PackedScene" uid="uid://ca1yyin1kgjlr" path="res://scenes/WinScreen/WinScreen.tscn" id="2_vj612"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://scenes/GameScene/ConfigurableSubViewport.gd" id="9_88l22"]
 [ext_resource type="PackedScene" uid="uid://bhq0r3qqbxofl" path="res://scenes/Worlds/GameWorld.tscn" id="9_118j6"]
 [ext_resource type="Script" path="res://scenes/GameScene/InputDisplayLabel.gd" id="10_tfa3m"]
+[ext_resource type="Shader" path="res://assets/shaders/chromatic_abberation.gdshader" id="11_f7lng"]
+[ext_resource type="PackedScene" uid="uid://qpcqlhjdngti" path="res://scenes/HUD/HUD.tscn" id="12_7rk1v"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0s8hw"]
 
@@ -36,6 +38,12 @@ shader_parameter/blur2 = 0.01
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_6a7il")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_q6rk4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_efhyq"]
+shader = ExtResource("11_f7lng")
+shader_parameter/r_displacement = Vector2(3, 0)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(-3, 0)
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -109,24 +117,20 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.411765)
 
-[node name="HUD" type="Panel" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_efhyq")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+stretch = true
 
-[node name="TopLabel" type="Label" parent="HUD"]
-unique_name_in_owner = true
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Booting Rescuer Interface 
-v2.25.13 (build-STTUM013499)
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
 
-Please stand by..."
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="HUD" parent="SubViewportContainer/SubViewport" instance=ExtResource("12_7rk1v")]
