@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhq0r3qqbxofl"]
+[gd_scene load_steps=8 format=3 uid="uid://bhq0r3qqbxofl"]
 
+[ext_resource type="Script" path="res://scenes/Worlds/GameWorld.gd" id="1_eceq6"]
 [ext_resource type="PackedScene" uid="uid://djjs0ycv4u1tm" path="res://scenes/Worlds/BlackHole.tscn" id="1_pookx"]
 [ext_resource type="Environment" uid="uid://cb8ah5k7lnh1y" path="res://scenes/Worlds/MenuEnvironment.tres" id="2_fd475"]
 [ext_resource type="Material" uid="uid://b0mrle8kix5ro" path="res://scenes/Worlds/StarSphereParticleProcess.tres" id="3_i0xhl"]
@@ -15,13 +16,25 @@ height = 0.1
 radial_segments = 16
 rings = 8
 
-[node name="GameWorld" type="Node3D"]
+[sub_resource type="Curve3D" id="Curve3D_x5twy"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.018528, 0, 8.55958, -1.2111, 0, 0.85268, 1.2111, 0, -0.85268, 3.31199, 0, 7.73902, -0.192768, 0, 1.17101, 0.192768, 0, -1.17101, 5.02551, 0, 4.52918, 0.24774, 0, 1.05616, -0.24774, 0, -1.05616, 4.95176, 0, 0.480644, 0.757938, 0, 0.57232, -0.757938, 0, -0.57232, 3.45228, 0, -2.0098, 0.640633, 0, 0.0676332, -0.640633, 0, -0.0676332, 1.42952, 0, -2.80761, 0.472866, 0.00012207, -0.299581, -0.472866, -0.00012207, 0.299581, -1.20262, 0, -2.37489, -0.0608923, 0.0456721, -1.52643, 0.0608923, -0.0456721, 1.52643, -2.51789, -0.0201506, 0.0207958, -1.42393, -0.0203234, -0.0252244, 1.42393, 0.0203234, 0.0252244, 0.0403473, -0.0451886, 2.50869, 0, -0.081099, 1.54247, 0, 0.081099, -1.54247, 2.50205, 0.128121, 0.00434267, 1.30325, 0.0199577, 0.0252056, -1.30325, -0.0199577, -0.0252056, 0.0162127, 0.229054, -2.52794, 0.120672, 0.0504311, -1.49573, -0.120672, -0.0504311, 1.49573, -2.7351, 0.0422475, -0.0484589, -0.646635, 0.125265, -1.06624, 0.646635, -0.125265, 1.06624, -2.18161, -0.366012, 5.26633, -0.90081, 0.0883745, -0.502794, 0.90081, -0.0883745, 0.502794, 1.25273, -0.759103, 9.22044),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, -3.13957, -0.00073708, 0, 0, 0, 0, 0, 0)
+}
+point_count = 14
+up_vector_enabled = false
+
+[node name="GameWorld" type="Node3D" node_paths=PackedStringArray("ship_path_follow", "primary_camera", "camera_target")]
+script = ExtResource("1_eceq6")
+ship_path_follow = NodePath("Path3D/PathFollow3D")
+ship_path_total_time = 100.0
+primary_camera = NodePath("Camera3D")
+camera_target = NodePath("BlackHole")
 
 [node name="BlackHole" parent="." instance=ExtResource("1_pookx")]
-transform = Transform3D(-0.755654, 0, 0.654971, 0, 1, 0, -0.654971, 0, -0.755654, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999999, 0.000105645, -0.00177931, 0, 0.998242, 0.0592697, 0.00178244, -0.0592696, 0.99824, -0.0153619, 0.511713, 8.61844)
+transform = Transform3D(0.999998, 0.000105645, -0.00177931, 0, 0.998242, 0.0592697, 0.00178244, -0.0592696, 0.99824, -0.018528, 0.317387, 8.55369)
 current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -35,3 +48,17 @@ explosiveness = 1.0
 visibility_aabb = AABB(-39.9443, -40.0504, -39.779, 80.029, 80.077, 79.8021)
 process_material = ExtResource("3_i0xhl")
 draw_pass_1 = SubResource("SphereMesh_7gw13")
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999312, 0.0370797, 0, -0.0370797, 0.999312, 0, 0, 0)
+curve = SubResource("Curve3D_x5twy")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.239222, 0, -0.970962, 0, 1, 0, 0.970962, 0, 0.239222, -0.018528, 0, 8.55958)
+loop = false
+tilt_enabled = false
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
+remote_path = NodePath("../../../Camera3D")
+update_rotation = false
+update_scale = false
