@@ -1,5 +1,6 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://23pdc2r50pw1"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://23pdc2r50pw1"]
 
+[ext_resource type="StyleBox" uid="uid://cfkf31205magg" path="res://scenes/HUD/HUDPanelStyleBox.tres" id="1_7jvm1"]
 [ext_resource type="FontFile" uid="uid://e2vjqqicral5" path="res://assets/fonts/Public_Pixel_Font_1_2/PublicPixel.ttf" id="1_x6ymh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i678b"]
@@ -38,17 +39,56 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_detail = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a0asm"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v53cy"]
 bg_color = Color(1, 1, 1, 0.0627451)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
+corner_radius_top_left = 1
+corner_radius_top_right = 128
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gky1"]
+bg_color = Color(1, 1, 1, 0.0627451)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 128
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ikl8e"]
+bg_color = Color(1, 1, 1, 0.0627451)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 1
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2kh16"]
+bg_color = Color(1, 1, 1, 0.0627451)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 128
 corner_detail = 1
 
 [resource]
@@ -64,5 +104,13 @@ Button/styles/hover = SubResource("StyleBoxFlat_i678b")
 Button/styles/normal = SubResource("StyleBoxFlat_qcavm")
 Button/styles/pressed = SubResource("StyleBoxFlat_2k0pd")
 Label/constants/line_spacing = 16
-Panel/styles/panel = SubResource("StyleBoxFlat_a0asm")
+Panel/styles/panel = ExtResource("1_7jvm1")
+PanelBottomLeft/base_type = &"Panel"
+PanelBottomLeft/styles/panel = SubResource("StyleBoxFlat_v53cy")
+PanelBottomRight/base_type = &"Panel"
+PanelBottomRight/styles/panel = SubResource("StyleBoxFlat_3gky1")
+PanelTopLeft/base_type = &"Panel"
+PanelTopLeft/styles/panel = SubResource("StyleBoxFlat_ikl8e")
+PanelTopRight/base_type = &"Panel"
+PanelTopRight/styles/panel = SubResource("StyleBoxFlat_2kh16")
 RichTextLabel/constants/line_separation = 16

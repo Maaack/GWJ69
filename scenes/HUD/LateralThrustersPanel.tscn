@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjj8pigxcav36"]
+
+[ext_resource type="PackedScene" uid="uid://cim7s3ldpnh8t" path="res://scenes/HUD/HUDPanel.tscn" id="1_k7ieu"]
+[ext_resource type="Texture2D" uid="uid://0eylrvgfaa1n" path="res://assets/images/arrow-up.svg" id="2_s88ly"]
+[ext_resource type="Texture2D" uid="uid://eglrxvqxgpc2" path="res://assets/images/arrow-left.svg" id="3_jw576"]
+[ext_resource type="Texture2D" uid="uid://beoofu414cyd5" path="res://assets/images/arrow-right.svg" id="4_2jnbh"]
+[ext_resource type="Texture2D" uid="uid://y2h135m1ajwt" path="res://assets/images/arrow-down.svg" id="5_u2mjl"]
+
+[node name="LateralThrustersPanel" instance=ExtResource("1_k7ieu")]
+
+[node name="GridContainer2" type="GridContainer" parent="MarginContainer/Control" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Spacer6" type="Control" parent="MarginContainer/Control/GridContainer2" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer7" type="Control" parent="MarginContainer/Control/GridContainer2" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Control/GridContainer2" index="2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="Spacer" type="Control" parent="MarginContainer/Control/GridContainer2/GridContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="UpButton" type="Button" parent="MarginContainer/Control/GridContainer2/GridContainer" index="1"]
+layout_mode = 2
+icon = ExtResource("2_s88ly")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Spacer2" type="Control" parent="MarginContainer/Control/GridContainer2/GridContainer" index="2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LeftButton" type="Button" parent="MarginContainer/Control/GridContainer2/GridContainer" index="3"]
+layout_mode = 2
+icon = ExtResource("3_jw576")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Spacer3" type="Control" parent="MarginContainer/Control/GridContainer2/GridContainer" index="4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RightButton" type="Button" parent="MarginContainer/Control/GridContainer2/GridContainer" index="5"]
+layout_mode = 2
+icon = ExtResource("4_2jnbh")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Spacer4" type="Control" parent="MarginContainer/Control/GridContainer2/GridContainer" index="6"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DownButton" type="Button" parent="MarginContainer/Control/GridContainer2/GridContainer" index="7"]
+layout_mode = 2
+icon = ExtResource("5_u2mjl")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Spacer5" type="Control" parent="MarginContainer/Control/GridContainer2/GridContainer" index="8"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer8" type="Control" parent="MarginContainer/Control/GridContainer2" index="3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

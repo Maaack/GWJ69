@@ -6,5 +6,6 @@ extends Control
 func _ready():
 	print(panel_boot_delay)
 	for hud_panel in hud_panels:
+		if hud_panel == null: continue
 		await(get_tree().create_timer(panel_boot_delay, false).timeout)
 		hud_panel.boot()

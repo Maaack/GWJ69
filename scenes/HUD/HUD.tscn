@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://qpcqlhjdngti"]
+[gd_scene load_steps=10 format=3 uid="uid://qpcqlhjdngti"]
 
 [ext_resource type="Shader" path="res://assets/shaders/chromatic_abberation.gdshader" id="1_n37hj"]
 [ext_resource type="Script" path="res://scenes/HUD/HUD.gd" id="2_5wier"]
 [ext_resource type="PackedScene" uid="uid://cim7s3ldpnh8t" path="res://scenes/HUD/HUDPanel.tscn" id="2_km8a4"]
+[ext_resource type="PackedScene" uid="uid://8mvfyal77oxi" path="res://scenes/HUD/InfoPanel.tscn" id="3_nquv7"]
+[ext_resource type="PackedScene" uid="uid://bjj8pigxcav36" path="res://scenes/HUD/LateralThrustersPanel.tscn" id="4_4ql6f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d6wex"]
 shader = ExtResource("1_n37hj")
@@ -107,7 +109,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_5wier")
-hud_panels = [NodePath("VBoxContainer/HBoxContainer/HUDPanel"), NodePath("VBoxContainer/HBoxContainer/HUDPanel2"), NodePath("VBoxContainer/HBoxContainer2/HUDPanel"), NodePath("VBoxContainer/HBoxContainer2/HUDPanel2")]
+hud_panels = [NodePath("VBoxContainer/HBoxContainer/InfoPanel"), NodePath("VBoxContainer/HBoxContainer/HUDPanel2"), NodePath("VBoxContainer/HBoxContainer2/LateralThrustersPanel"), NodePath("VBoxContainer/HBoxContainer2/HUDPanel2")]
 panel_boot_delay = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -123,8 +125,9 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 16
 
-[node name="HUDPanel" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_km8a4")]
+[node name="InfoPanel" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3_nquv7")]
 layout_mode = 2
+theme_type_variation = &"PanelTopLeft"
 
 [node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -132,6 +135,7 @@ size_flags_horizontal = 3
 
 [node name="HUDPanel2" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_km8a4")]
 layout_mode = 2
+theme_type_variation = &"PanelTopRight"
 
 [node name="Spacer2" type="Control" parent="VBoxContainer"]
 layout_mode = 2
@@ -143,8 +147,9 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 16
 
-[node name="HUDPanel" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("2_km8a4")]
+[node name="LateralThrustersPanel" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("4_4ql6f")]
 layout_mode = 2
+theme_type_variation = &"PanelBottomLeft"
 
 [node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -152,6 +157,7 @@ size_flags_horizontal = 3
 
 [node name="HUDPanel2" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("2_km8a4")]
 layout_mode = 2
+theme_type_variation = &"PanelBottomRight"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
