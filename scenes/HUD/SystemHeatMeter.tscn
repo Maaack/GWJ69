@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://b27npb3ogsdvp"]
+
+[ext_resource type="Texture2D" uid="uid://caoe637y8006e" path="res://assets/images/wide-arrow-up.svg" id="1_0most"]
+[ext_resource type="Script" path="res://scenes/HUD/SystemHeatMeter.gd" id="1_kf1ws"]
+[ext_resource type="Texture2D" uid="uid://dbv2drw5jjkwt" path="res://assets/images/wide-arrow-down.svg" id="2_64vxx"]
+
+[sub_resource type="Gradient" id="Gradient_vtvi8"]
+offsets = PackedFloat32Array(0, 0.0827068, 0.52381, 0.929825)
+colors = PackedColorArray(0, 0.958439, 0.828468, 1, 0, 1, 0, 1, 0.952445, 0.952446, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mqqlf"]
+gradient = SubResource("Gradient_vtvi8")
+fill_from = Vector2(1, 1)
+
+[node name="SystemHeatMeter" type="VBoxContainer"]
+offset_left = 1.0
+offset_right = 25.0
+offset_bottom = 632.0
+size_flags_horizontal = 3
+script = ExtResource("1_kf1ws")
+temperature = 400
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+
+[node name="HeatMeter" type="TextureProgressBar" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"HeatMeter"
+max_value = 1000.0
+value = 400.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_mqqlf")
+
+[node name="SystemLabel" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 64)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/line_spacing = 0
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="UpButton" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+icon = ExtResource("1_0most")
+icon_alignment = 1
+expand_icon = true
+
+[node name="CoolantLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+text = "0"
+horizontal_alignment = 1
+
+[node name="DownButton" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+icon = ExtResource("2_64vxx")
+icon_alignment = 1
+expand_icon = true
+
+[node name="TickTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="pressed" from="UpButton" to="." method="_on_up_button_pressed"]
+[connection signal="pressed" from="DownButton" to="." method="_on_down_button_pressed"]
+[connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]
