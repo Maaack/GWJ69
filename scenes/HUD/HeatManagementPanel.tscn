@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://lgrvj01d1xwi"]
+
+[ext_resource type="PackedScene" uid="uid://cim7s3ldpnh8t" path="res://scenes/HUD/HUDPanel.tscn" id="1_tliqr"]
+[ext_resource type="PackedScene" uid="uid://b27npb3ogsdvp" path="res://scenes/HUD/SystemHeatMeter.tscn" id="2_upvy8"]
+
+[node name="HeatManagementPanel" instance=ExtResource("1_tliqr")]
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Control" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Control/GridContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Coolant
+Control
+Reserve: 1"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Control/GridContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="SystemHeatMeter" parent="MarginContainer/Control/GridContainer/HBoxContainer" index="0" instance=ExtResource("2_upvy8")]
+layout_mode = 2
+system_name = "Reactor"
+heat_level = 4
+
+[node name="SystemHeatMeter2" parent="MarginContainer/Control/GridContainer/HBoxContainer" index="1" instance=ExtResource("2_upvy8")]
+layout_mode = 2
+system_name = "Engine"
+heat_level = 3
+
+[node name="SystemHeatMeter3" parent="MarginContainer/Control/GridContainer/HBoxContainer" index="2" instance=ExtResource("2_upvy8")]
+layout_mode = 2
+system_name = "Hull"
+heat_level = 3

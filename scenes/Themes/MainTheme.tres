@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://23pdc2r50pw1"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://23pdc2r50pw1"]
 
 [ext_resource type="StyleBox" uid="uid://cfkf31205magg" path="res://scenes/HUD/HUDPanelStyleBox.tres" id="1_7jvm1"]
 [ext_resource type="FontFile" uid="uid://e2vjqqicral5" path="res://assets/fonts/Public_Pixel_Font_1_2/PublicPixel.ttf" id="1_x6ymh"]
@@ -38,6 +38,16 @@ border_blend = true
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_detail = 1
+
+[sub_resource type="Gradient" id="Gradient_gsu15"]
+offsets = PackedFloat32Array(0, 0.0827068, 0.52381, 0.929825)
+colors = PackedColorArray(0, 0.958439, 0.828468, 1, 0, 1, 0, 1, 0.952445, 0.952446, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1oulg"]
+gradient = SubResource("Gradient_gsu15")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e14sa"]
+texture = SubResource("GradientTexture1D_1oulg")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v53cy"]
 bg_color = Color(1, 1, 1, 0.0627451)
@@ -103,6 +113,8 @@ Button/styles/focus = SubResource("StyleBoxFlat_i678b")
 Button/styles/hover = SubResource("StyleBoxFlat_i678b")
 Button/styles/normal = SubResource("StyleBoxFlat_qcavm")
 Button/styles/pressed = SubResource("StyleBoxFlat_2k0pd")
+HeatMeter/base_type = &"ProgressBar"
+HeatMeter/styles/fill = SubResource("StyleBoxTexture_e14sa")
 Label/constants/line_spacing = 16
 Panel/styles/panel = ExtResource("1_7jvm1")
 PanelBottomLeft/base_type = &"Panel"
