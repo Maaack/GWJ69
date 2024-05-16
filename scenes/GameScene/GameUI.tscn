@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bmv8sswk6pfvc"]
+[gd_scene load_steps=23 format=3 uid="uid://bmv8sswk6pfvc"]
 
 [ext_resource type="Script" path="res://scenes/GameScene/GameUI.gd" id="1_jnhpe"]
 [ext_resource type="PackedScene" uid="uid://ca1yyin1kgjlr" path="res://scenes/WinScreen/WinScreen.tscn" id="2_vj612"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scenes/GameScene/InputDisplayLabel.gd" id="10_tfa3m"]
 [ext_resource type="Shader" path="res://assets/shaders/chromatic_abberation.gdshader" id="11_f7lng"]
 [ext_resource type="PackedScene" uid="uid://qpcqlhjdngti" path="res://scenes/HUD/HUD.tscn" id="12_7rk1v"]
+[ext_resource type="AudioStream" uid="uid://ctl7ey8hww671" path="res://assets/sfx/SFX - 0036 - Audio - riser.ogg" id="14_5tj8j"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0s8hw"]
 
@@ -97,6 +98,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BootingStreamPlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_0egjo"]
 length = 0.001
@@ -147,6 +160,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BootingStreamPlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_btr5u"]
@@ -245,6 +270,11 @@ size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
 [node name="HUD" parent="SubViewportContainer/SubViewport" instance=ExtResource("12_7rk1v")]
+
+[node name="BootingStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_5tj8j")
+volume_db = -10.0
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

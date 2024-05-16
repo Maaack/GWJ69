@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ctl7ey8hww671"
+path="res://.godot/imported/SFX - 0036 - Audio - riser.ogg-905de153db1b148612fec0d0ce36b2ba.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/SFX - 0036 - Audio - riser.ogg"
+dest_files=["res://.godot/imported/SFX - 0036 - Audio - riser.ogg-905de153db1b148612fec0d0ce36b2ba.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
