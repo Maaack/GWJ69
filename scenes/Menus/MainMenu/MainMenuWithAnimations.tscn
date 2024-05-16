@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://cl3m5kduf8p41"]
+[gd_scene load_steps=19 format=3 uid="uid://cl3m5kduf8p41"]
 
 [ext_resource type="PackedScene" uid="uid://d3uv8a6plci33" path="res://scenes/Menus/MainMenu/MainMenu.tscn" id="1_ivjft"]
 [ext_resource type="Script" path="res://scenes/Menus/MainMenu/MainMenuWithAnimations.gd" id="2_e2khl"]
 [ext_resource type="Theme" uid="uid://23pdc2r50pw1" path="res://scenes/Themes/MainTheme.tres" id="2_qlbkb"]
 [ext_resource type="PackedScene" uid="uid://bp1c64owlukjd" path="res://scenes/Worlds/MenuWorld.tscn" id="3_51dw6"]
+[ext_resource type="AudioStream" uid="uid://b87pa1fq3wtty" path="res://assets/music/CalmBefore_Part2.ogg" id="4_ajpfg"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "Intro"
@@ -364,7 +365,7 @@ anim_player = NodePath("../MenuAnimationPlayer")
 parameters/conditions/intro_done = false
 
 [node name="BackgroundMusicPlayer" parent="." index="3"]
-bus = &"Master"
+stream = ExtResource("4_ajpfg")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." index="5"]
 layout_mode = 1
