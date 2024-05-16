@@ -5,6 +5,8 @@ extends Control
 
 func _ready():
 	InGameMenuController.scene_tree = get_tree()
+	if Input.is_action_pressed("ui_console"):
+		%HUD.instant_boot()
 
 func _on_level_lost():
 	InGameMenuController.open_menu(lose_scene, get_viewport())

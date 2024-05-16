@@ -1,14 +1,36 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjj8pigxcav36"]
+[gd_scene load_steps=11 format=3 uid="uid://bjj8pigxcav36"]
 
 [ext_resource type="PackedScene" uid="uid://cim7s3ldpnh8t" path="res://scenes/HUD/HUDPanel.tscn" id="1_k7ieu"]
 [ext_resource type="Texture2D" uid="uid://c5yuxfvi6yv7w" path="res://assets/images/crosshair.svg" id="2_43m3u"]
 [ext_resource type="Texture2D" uid="uid://0eylrvgfaa1n" path="res://assets/images/arrow-up.svg" id="2_s88ly"]
+[ext_resource type="Script" path="res://scenes/HUD/LateralThrustersPanel.gd" id="2_wcvmv"]
 [ext_resource type="Texture2D" uid="uid://bxph7hbws1b2n" path="res://assets/images/plain-circle.svg" id="3_75ffm"]
 [ext_resource type="Texture2D" uid="uid://eglrxvqxgpc2" path="res://assets/images/arrow-left.svg" id="3_jw576"]
 [ext_resource type="Texture2D" uid="uid://beoofu414cyd5" path="res://assets/images/arrow-right.svg" id="4_2jnbh"]
 [ext_resource type="Texture2D" uid="uid://y2h135m1ajwt" path="res://assets/images/arrow-down.svg" id="5_u2mjl"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6hkfg"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mocu8"]
+width = 256
+height = 256
+seamless = true
+noise = SubResource("FastNoiseLite_6hkfg")
+
 [node name="LateralThrustersPanel" instance=ExtResource("1_k7ieu")]
+script = ExtResource("2_wcvmv")
+target_offset = Vector2(0, 0)
+target_offset_mod = 0.1
+danger_offset_length = 40.0
+noise_texture = SubResource("NoiseTexture2D_mocu8")
+noise_force_mod = 8.0
+engine_charge = 200
+engine_max_charge = 300
+engine_recharge_speed = 5
+good_color = Color(0.0625162, 1, 0.0625162, 1)
+fine_color = Color(1, 1, 0.0627451, 1)
+warning_color = Color(1, 0.478431, 0, 1)
+danger_color = Color(1, 0, 0, 1)
 
 [node name="GridContainer2" type="GridContainer" parent="MarginContainer/Control" index="0"]
 layout_mode = 1
@@ -19,14 +41,45 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/GridContainer2" index="0"]
+[node name="Spacer6" type="Control" parent="MarginContainer/Control/GridContainer2" index="0"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Control" index="1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/HBoxContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/HBoxContainer/VBoxContainer" index="0"]
+layout_mode = 2
+size_flags_vertical = 3
 texture = ExtResource("2_43m3u")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/GridContainer2/TextureRect" index="0"]
-modulate = Color(0, 1, 0, 1)
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Control/HBoxContainer/VBoxContainer/TextureRect" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Control/HBoxContainer/VBoxContainer/TextureRect/CenterContainer" index="0"]
+layout_mode = 2
+
+[node name="TargetRect" type="TextureRect" parent="MarginContainer/Control/HBoxContainer/VBoxContainer/TextureRect/CenterContainer/Control" index="0"]
+unique_name_in_owner = true
+modulate = Color(0.0625162, 1, 0.0625162, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -35,7 +88,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -12.0
 offset_top = -12.0
-offset_right = 12.0
+offset_right = 11.9999
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -43,67 +96,93 @@ texture = ExtResource("3_75ffm")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer6" type="Control" parent="MarginContainer/Control/GridContainer2" index="1"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/Control/GridContainer2" index="2"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Control/HBoxContainer/VBoxContainer" index="1"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 
-[node name="Spacer" type="Control" parent="MarginContainer/Control/GridContainer2/GridContainer" index="0"]
+[node name="Spacer" type="Control" parent="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="UpButton" type="Button" parent="MarginContainer/Control/GridContainer2/GridContainer" index="1"]
+[node name="UpButton" type="Button" parent="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer" index="1"]
 layout_mode = 2
 icon = ExtResource("2_s88ly")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Spacer2" type="Control" parent="MarginContainer/Control/GridContainer2/GridContainer" index="2"]
+[node name="Spacer2" type="Control" parent="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer" index="2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LeftButton" type="Button" parent="MarginContainer/Control/GridContainer2/GridContainer" index="3"]
+[node name="LeftButton" type="Button" parent="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer" index="3"]
 layout_mode = 2
 icon = ExtResource("3_jw576")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Spacer3" type="Control" parent="MarginContainer/Control/GridContainer2/GridContainer" index="4"]
+[node name="Spacer3" type="Control" parent="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer" index="4"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="RightButton" type="Button" parent="MarginContainer/Control/GridContainer2/GridContainer" index="5"]
+[node name="RightButton" type="Button" parent="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer" index="5"]
 layout_mode = 2
 icon = ExtResource("4_2jnbh")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Spacer4" type="Control" parent="MarginContainer/Control/GridContainer2/GridContainer" index="6"]
+[node name="Spacer4" type="Control" parent="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer" index="6"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="DownButton" type="Button" parent="MarginContainer/Control/GridContainer2/GridContainer" index="7"]
+[node name="DownButton" type="Button" parent="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer" index="7"]
 layout_mode = 2
 icon = ExtResource("5_u2mjl")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Spacer5" type="Control" parent="MarginContainer/Control/GridContainer2/GridContainer" index="8"]
+[node name="Spacer5" type="Control" parent="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer" index="8"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Spacer7" type="Control" parent="MarginContainer/Control/GridContainer2" index="3"]
+[node name="EngineChargeBar" type="ProgressBar" parent="MarginContainer/Control/HBoxContainer" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 1
+max_value = 300.0
+value = 200.0
+fill_mode = 3
+
+[node name="Label" type="Label" parent="MarginContainer/Control/HBoxContainer" index="2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Lateral
+Engine
+Charge"
+vertical_alignment = 2
+
+[node name="TickTimer" type="Timer" parent="." index="4"]
+wait_time = 0.5
+autostart = true
+
+[connection signal="button_down" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/UpButton" to="." method="_on_up_button_button_down"]
+[connection signal="button_up" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/UpButton" to="." method="_on_up_button_button_up"]
+[connection signal="pressed" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/UpButton" to="." method="_on_up_button_pressed"]
+[connection signal="button_down" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/LeftButton" to="." method="_on_left_button_button_down"]
+[connection signal="button_up" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/LeftButton" to="." method="_on_left_button_button_up"]
+[connection signal="pressed" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="button_down" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/RightButton" to="." method="_on_right_button_button_down"]
+[connection signal="button_up" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/RightButton" to="." method="_on_right_button_button_up"]
+[connection signal="pressed" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/RightButton" to="." method="_on_right_button_pressed"]
+[connection signal="button_down" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/DownButton" to="." method="_on_down_button_button_down"]
+[connection signal="button_up" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/DownButton" to="." method="_on_down_button_button_up"]
+[connection signal="pressed" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/DownButton" to="." method="_on_down_button_pressed"]
+[connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cim7s3ldpnh8t"]
+[gd_scene load_steps=7 format=3 uid="uid://cim7s3ldpnh8t"]
 
 [ext_resource type="Script" path="res://scenes/HUD/HUDPanel.gd" id="1_p2hio"]
 
@@ -121,10 +121,63 @@ tracks/3/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_swum1"]
+resource_name = "InstantBoot"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CoverPanel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bhfhu"]
 _data = {
 "Booting": SubResource("Animation_42ka4"),
 "Init": SubResource("Animation_71bkg"),
+"InstantBoot": SubResource("Animation_swum1"),
 "RESET": SubResource("Animation_qlhbo")
 }
 
@@ -154,7 +207,7 @@ theme_override_constants/margin_bottom = 8
 [node name="Control" type="Control" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="BootingAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_bhfhu")
 }
@@ -178,3 +231,5 @@ grow_vertical = 2
 text = "Loading"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="animation_finished" from="BootingAnimationPlayer" to="." method="_on_booting_animation_player_animation_finished"]
