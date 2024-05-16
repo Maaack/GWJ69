@@ -11,4 +11,5 @@ func _ready():
 
 func instant_boot():
 	for hud_panel in hud_panels:
+		if hud_panel == null: continue
 		hud_panel.instant_boot()
