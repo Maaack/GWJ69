@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjj8pigxcav36"]
+[gd_scene load_steps=8 format=3 uid="uid://bjj8pigxcav36"]
 
 [ext_resource type="PackedScene" uid="uid://cim7s3ldpnh8t" path="res://scenes/HUD/HUDPanel.tscn" id="1_k7ieu"]
+[ext_resource type="Texture2D" uid="uid://c5yuxfvi6yv7w" path="res://assets/images/crosshair.svg" id="2_43m3u"]
 [ext_resource type="Texture2D" uid="uid://0eylrvgfaa1n" path="res://assets/images/arrow-up.svg" id="2_s88ly"]
+[ext_resource type="Texture2D" uid="uid://bxph7hbws1b2n" path="res://assets/images/plain-circle.svg" id="3_75ffm"]
 [ext_resource type="Texture2D" uid="uid://eglrxvqxgpc2" path="res://assets/images/arrow-left.svg" id="3_jw576"]
 [ext_resource type="Texture2D" uid="uid://beoofu414cyd5" path="res://assets/images/arrow-right.svg" id="4_2jnbh"]
 [ext_resource type="Texture2D" uid="uid://y2h135m1ajwt" path="res://assets/images/arrow-down.svg" id="5_u2mjl"]
@@ -17,12 +19,31 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 2
 
-[node name="Spacer6" type="Control" parent="MarginContainer/Control/GridContainer2" index="0"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/GridContainer2" index="0"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+texture = ExtResource("2_43m3u")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Spacer7" type="Control" parent="MarginContainer/Control/GridContainer2" index="1"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/GridContainer2/TextureRect" index="0"]
+modulate = Color(0, 1, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_75ffm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Spacer6" type="Control" parent="MarginContainer/Control/GridContainer2" index="1"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -82,7 +103,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Spacer8" type="Control" parent="MarginContainer/Control/GridContainer2" index="3"]
+[node name="Spacer7" type="Control" parent="MarginContainer/Control/GridContainer2" index="3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
