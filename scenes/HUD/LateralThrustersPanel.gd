@@ -24,7 +24,8 @@ extends HUDPanel
 @export var noise_force_mod : float = 1.0
 @export var engine_charge : int = 0 :
 	set(value):
-		if value < 0 or value > engine_max_charge : return
+		if value < 0  : value = 0
+		if value > engine_max_charge : value = engine_max_charge
 		engine_charge = value
 		if is_inside_tree():
 			%EngineChargeBar.value = engine_charge
