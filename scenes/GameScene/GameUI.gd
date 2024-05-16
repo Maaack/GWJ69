@@ -5,7 +5,7 @@ extends Control
 
 func _ready():
 	InGameMenuController.scene_tree = get_tree()
-	if Input.is_action_pressed("ui_console"):
+	if Input.is_action_pressed(&"ui_console"):
 		%HUD.instant_boot()
 
 func _on_level_lost():
@@ -27,3 +27,7 @@ func _on_level_loader_levels_finished():
 
 func _on_level_loader_level_load_started():
 	$LoadingScreen.reset()
+
+func _unhandled_input(event):
+	if event.is_action_pressed(&"ui_hide"):
+		%HUDViewportContainer.visible = !%HUDViewportContainer.visible
