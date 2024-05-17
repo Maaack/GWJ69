@@ -100,7 +100,7 @@ func _flush_coolant():
 	coolant_reserve -= 1
 
 func _on_flush_button_pressed():
-	if coolant_reserve > 1:
+	if coolant_reserve > 0:
 		_flush_systems()
 		_flush_coolant()
 		$FlushCooldownTimer.start()
