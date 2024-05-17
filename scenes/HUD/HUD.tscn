@@ -160,6 +160,8 @@ size_flags_horizontal = 3
 [node name="HUDPanel2" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("2_km8a4")]
 layout_mode = 2
 theme_type_variation = &"PanelBottomRight"
+warning_color = Color(0, 0, 0, 1)
+danger_color = Color(0, 0, 0, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

@@ -29,8 +29,6 @@ engine_max_charge = 300
 engine_recharge_speed = 3
 good_color = Color(0.0625162, 1, 0.0625162, 1)
 fine_color = Color(1, 1, 0.0627451, 1)
-warning_color = Color(1, 0.478431, 0, 1)
-danger_color = Color(1, 0, 0, 1)
 
 [node name="GridContainer2" type="GridContainer" parent="MarginContainer/Control" index="0"]
 layout_mode = 1

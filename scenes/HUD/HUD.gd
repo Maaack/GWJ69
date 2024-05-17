@@ -1,12 +1,16 @@
 extends Control
 
+signal system_failed
+
 @export var hud_panels : Array[HUDPanel]
 @export var panel_boot_delay : float = 0.0
 @export var info_panel : InfoPanel
 
+
 func _ready():
 	for hud_panel in hud_panels:
 		if hud_panel == null: continue
+		hud_panel.system_failed.connect(func(): system_failed.emit())
 		await(get_tree().create_timer(panel_boot_delay, false).timeout)
 		hud_panel.boot()
 

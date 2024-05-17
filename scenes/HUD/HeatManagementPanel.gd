@@ -55,3 +55,19 @@ func cycle_heat_levels():
 
 func _on_heat_change_timer_timeout():
 	cycle_heat_levels()
+
+func _update_state():
+	var max_system_temperature_ratio : float
+	for heat_meter in heat_meter_container.get_children():
+		if heat_meter is SystemHeatMeter:
+			var system_temperature_ratio = float(heat_meter.temperature) / float(heat_meter.max_temperature)
+			max_system_temperature_ratio = max(system_temperature_ratio, max_system_temperature_ratio)
+	if max_system_temperature_ratio > 1.0:
+		state = States.DANGER
+	elif max_system_temperature_ratio > 0.8:
+		state = States.WARNING
+	else:
+		state = States.SAFE
+
+func _on_tick_timer_timeout():
+	_update_state()

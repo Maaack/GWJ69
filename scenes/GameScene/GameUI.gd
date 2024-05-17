@@ -37,3 +37,6 @@ func _on_game_world_distance_changed(distance_km):
 
 func _on_game_world_time_changed(local_time):
 	%HUD.set_local_time(local_time)
+
+func _on_hud_system_failed():
+	_on_level_lost()

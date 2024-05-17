@@ -42,8 +42,6 @@ const WALK_DIRECTION_CHANGE_CHANCE : float = 0.1
 @export var engine_recharge_speed : int = 1
 @export var good_color : Color
 @export var fine_color : Color
-@export var warning_color : Color
-@export var danger_color : Color
 
 @onready var target_origin : Vector2 = %TargetRect.position
 
@@ -91,7 +89,17 @@ func _get_y_noise_pixel() -> Vector2i:
 		y_noise_iter = 0
 	return y_noise_pixel
 
+func _update_state():
+	var offset_total_length = (target_offset * target_offset_mod).length()
+	if offset_total_length > danger_offset_length:
+		state = States.DANGER
+	elif offset_total_length > danger_offset_length * 0.75:
+		state = States.WARNING
+	else:
+		state = States.SAFE
+
 func _on_tick_timer_timeout():
+	_update_state()
 	var x_noise_pixel = _get_x_noise_pixel()
 	var y_noise_pixel = _get_y_noise_pixel()
 	var x_effect = (noise_image.get_pixelv(x_noise_pixel).r * 2) - 1
