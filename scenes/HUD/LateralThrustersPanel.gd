@@ -1,6 +1,8 @@
 @tool
 extends HUDPanel
 
+const WALK_DIRECTION_CHANGE_CHANCE : float = 0.1
+
 @export var target_offset : Vector2 :
 	set(value):
 		target_offset = value
@@ -46,11 +48,21 @@ extends HUDPanel
 @onready var target_origin : Vector2 = %TargetRect.position
 
 var noise_image : Image
-var noise_iter : int
+var x_noise_iter : int
+var y_noise_iter : int
 var x_noise_offset : Vector2i
 var y_noise_offset : Vector2i
+var x_noise_vector : Vector2i
+var y_noise_vector : Vector2i
 
 var thrust_vector : Vector2
+
+var direction_array : Array[Vector2i] = [
+	Vector2i.UP,
+	Vector2i.DOWN,
+	Vector2i.LEFT,
+	Vector2i.RIGHT,
+]
 
 func _ready():
 	super._ready()
@@ -59,12 +71,30 @@ func _ready():
 	x_noise_offset = Vector2i(randi() % noise_texture_size.x, randi() % noise_texture_size.y)
 	y_noise_offset = Vector2i(randi() % noise_texture_size.x, randi() % noise_texture_size.y)
 
+func _get_x_noise_pixel() -> Vector2i:
+	x_noise_iter += 1
+	var noise_iter_vec := x_noise_vector * x_noise_iter
+	var x_noise_pixel := (x_noise_offset + noise_iter_vec) % noise_image.get_width()
+	if randf() < WALK_DIRECTION_CHANGE_CHANCE:
+		x_noise_offset = x_noise_pixel
+		x_noise_vector = direction_array.pick_random()
+		x_noise_iter = 0
+	return x_noise_pixel
+
+func _get_y_noise_pixel() -> Vector2i:
+	y_noise_iter += 1
+	var noise_iter_vec := y_noise_vector * y_noise_iter
+	var y_noise_pixel := (y_noise_offset + noise_iter_vec) % noise_image.get_height()
+	if randf() < WALK_DIRECTION_CHANGE_CHANCE:
+		y_noise_offset = y_noise_pixel
+		y_noise_vector = direction_array.pick_random()
+		y_noise_iter = 0
+	return y_noise_pixel
+
 func _on_tick_timer_timeout():
-	noise_iter += 1
 	engine_charge += engine_recharge_speed
-	var noise_iter_vec := Vector2i(noise_iter, 0)
-	var x_noise_pixel = (x_noise_offset + noise_iter_vec) % noise_image.get_width()
-	var y_noise_pixel = (y_noise_offset + noise_iter_vec) % noise_image.get_height()
+	var x_noise_pixel = _get_x_noise_pixel()
+	var y_noise_pixel = _get_y_noise_pixel()
 	var x_effect = (noise_image.get_pixelv(x_noise_pixel).r * 2) - 1
 	var y_effect = (noise_image.get_pixelv(y_noise_pixel).r * 2) - 1
 	var total_noise_force = Vector2(x_effect, y_effect) * noise_force_mod
