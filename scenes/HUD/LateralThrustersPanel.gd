@@ -43,6 +43,7 @@ const WALK_DIRECTION_CHANGE_CHANCE : float = 0.1
 		if is_inside_tree():
 			%EngineChargeBar.max_value = engine_max_charge
 
+@export var engine_force_mod : float = 1.0
 @export var engine_recharge_speed : int = 1
 @export var good_color : Color
 @export var fine_color : Color
@@ -77,6 +78,10 @@ func _get_x_noise_pixel() -> Vector2i:
 	x_noise_iter += 1
 	var noise_iter_vec := x_noise_vector * x_noise_iter
 	var x_noise_pixel := (x_noise_offset + noise_iter_vec) % noise_image.get_width()
+	if x_noise_pixel.x < 0:
+		x_noise_pixel.x = x_noise_pixel.x + noise_image.get_width()
+	if x_noise_pixel.y < 0:
+		x_noise_pixel.y = x_noise_pixel.y + noise_image.get_height()
 	if randf() < WALK_DIRECTION_CHANGE_CHANCE:
 		x_noise_offset = x_noise_pixel
 		x_noise_vector = direction_array.pick_random()
@@ -87,6 +92,10 @@ func _get_y_noise_pixel() -> Vector2i:
 	y_noise_iter += 1
 	var noise_iter_vec := y_noise_vector * y_noise_iter
 	var y_noise_pixel := (y_noise_offset + noise_iter_vec) % noise_image.get_height()
+	if y_noise_pixel.x < 0:
+		y_noise_pixel.x = y_noise_pixel.x + noise_image.get_width()
+	if y_noise_pixel.y < 0:
+		y_noise_pixel.y = y_noise_pixel.y + noise_image.get_height()
 	if randf() < WALK_DIRECTION_CHANGE_CHANCE:
 		y_noise_offset = y_noise_pixel
 		y_noise_vector = direction_array.pick_random()
@@ -106,7 +115,7 @@ func _on_tick_timer_timeout():
 	_update_state()
 	var desired_charge = round(thrust_vector.length())
 	if desired_charge > 0 and engine_charge > desired_charge:
-		target_offset += thrust_vector
+		target_offset += thrust_vector * engine_force_mod
 		engine_charge -= desired_charge
 		engine_heated.emit()
 
