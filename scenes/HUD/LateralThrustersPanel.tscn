@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bjj8pigxcav36"]
+[gd_scene load_steps=12 format=3 uid="uid://bjj8pigxcav36"]
 
 [ext_resource type="PackedScene" uid="uid://cim7s3ldpnh8t" path="res://scenes/HUD/HUDPanel.tscn" id="1_k7ieu"]
 [ext_resource type="Texture2D" uid="uid://c5yuxfvi6yv7w" path="res://assets/images/crosshair.svg" id="2_43m3u"]
@@ -17,13 +17,26 @@ height = 256
 seamless = true
 noise = SubResource("FastNoiseLite_6hkfg")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_asvhi"]
+bg_color = Color(0, 0.771456, 0.842081, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [node name="LateralThrustersPanel" instance=ExtResource("1_k7ieu")]
 script = ExtResource("2_wcvmv")
 target_offset = Vector2(0, 0)
 target_offset_mod = 0.1
 danger_offset_length = 40.0
 noise_texture = SubResource("NoiseTexture2D_mocu8")
-noise_force_mod = 8.0
+noise_force_mod = 5.0
+drift_force_mod = 0.1
 engine_charge = 200
 engine_max_charge = 300
 engine_recharge_speed = 3
@@ -154,11 +167,40 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_styles/fill = SubResource("StyleBoxFlat_asvhi")
 max_value = 300.0
 value = 200.0
 fill_mode = 3
 
-[node name="Label" type="Label" parent="MarginContainer/Control/HBoxContainer" index="2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/Control/HBoxContainer" index="2"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Spacer" type="Control" parent="MarginContainer/Control/HBoxContainer/VBoxContainer2" index="0"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Tooltip" type="Label" parent="MarginContainer/Control/HBoxContainer/VBoxContainer2" index="1"]
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Lateral thrusters help keep
+the ship on course.
+
+Usage raises the temperature
+of the engines.
+
+They recharge when not used."
+mouse_filter = 0
+mouse_default_cursor_shape = 16
+theme_type_variation = &"GameTipLabel"
+text = "?"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/Control/HBoxContainer/VBoxContainer2" index="2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Control/HBoxContainer/VBoxContainer2" index="3"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -168,10 +210,14 @@ Charge"
 vertical_alignment = 2
 
 [node name="TickTimer" type="Timer" parent="." index="4"]
+wait_time = 0.05
+autostart = true
+
+[node name="DriftTickTimer" type="Timer" parent="." index="5"]
 wait_time = 0.5
 autostart = true
 
-[node name="RechargeTickTimer" type="Timer" parent="." index="5"]
+[node name="RechargeTickTimer" type="Timer" parent="." index="6"]
 wait_time = 0.25
 autostart = true
 
@@ -188,4 +234,6 @@ autostart = true
 [connection signal="button_up" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/DownButton" to="." method="_on_down_button_button_up"]
 [connection signal="pressed" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/DownButton" to="." method="_on_down_button_pressed"]
 [connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]
+[connection signal="timeout" from="DriftTickTimer" to="." method="_on_tick_timer_timeout"]
+[connection signal="timeout" from="DriftTickTimer" to="." method="_on_drift_tick_timer_timeout"]
 [connection signal="timeout" from="RechargeTickTimer" to="." method="_on_recharge_tick_timer_timeout"]

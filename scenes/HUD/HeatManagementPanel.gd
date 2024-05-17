@@ -1,4 +1,7 @@
+class_name HeatManagementPanel
 extends HUDPanel
+
+signal coolant_pumping_changed(current_amount)
 
 const COOLANT_STRING = "Coolant
 Control
@@ -10,21 +13,28 @@ Reserve: %d"
 		_update_flush_button()
 		if is_inside_tree():
 			%CoolantLabel.text = COOLANT_STRING % coolant_reserve
+
 @export var overall_heat_level : int
 @export var heat_change_time : float
 @export var heat_change_randomness : float
-
 @export var heat_meter_container : Control
+
+var coolant_pumping : int :
+	set(value):
+		coolant_pumping = value
+		coolant_pumping_changed.emit(coolant_pumping)
 
 func meter_requests_coolant(heat_meter : SystemHeatMeter):
 	if coolant_reserve > 0:
 		coolant_reserve -= 1
 		heat_meter.coolant_level += 1
+		coolant_pumping += 1
 
 func meter_returns_coolant(heat_meter : SystemHeatMeter):
 	if heat_meter.coolant_level > 0:
 		heat_meter.coolant_level -= 1
 		coolant_reserve += 1
+		coolant_pumping -= 1
 
 func _ready():
 	super._ready()
@@ -94,3 +104,9 @@ func _on_flush_button_pressed():
 		_flush_coolant()
 		$FlushCooldownTimer.start()
 		_update_flush_button()
+
+func heat_engine(amount : int):
+	for heat_meter in heat_meter_container.get_children():
+		if heat_meter is SystemHeatMeter:
+			if heat_meter.system_name == "Engine":
+				heat_meter.temperature += amount

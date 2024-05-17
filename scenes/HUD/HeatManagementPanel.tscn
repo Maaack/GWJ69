@@ -87,7 +87,7 @@ one_shot = true
 autostart = true
 
 [node name="TickTimer" type="Timer" parent="." index="6"]
-wait_time = 0.5
+wait_time = 0.1
 autostart = true
 
 [node name="FlushCooldownTimer" type="Timer" parent="." index="7"]

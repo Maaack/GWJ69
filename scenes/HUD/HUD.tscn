@@ -101,7 +101,7 @@ _data = {
 "RESET": SubResource("Animation_q14gu")
 }
 
-[node name="HUD" type="Control" node_paths=PackedStringArray("hud_panels", "info_panel")]
+[node name="HUD" type="Control" node_paths=PackedStringArray("hud_panels", "info_panel", "heat_management_panel", "lateral_thrust_panel")]
 material = SubResource("ShaderMaterial_d6wex")
 layout_mode = 3
 anchors_preset = 15
@@ -112,7 +112,11 @@ grow_vertical = 2
 script = ExtResource("2_5wier")
 hud_panels = [NodePath("VBoxContainer/HBoxContainer/InfoPanel"), NodePath("VBoxContainer/HBoxContainer/HeatManagementPanel"), NodePath("VBoxContainer/HBoxContainer2/LateralThrustersPanel"), NodePath("VBoxContainer/HBoxContainer2/HUDPanel2")]
 panel_boot_delay = 1.0
+pump_drift_mod = 0.1
+engine_heat_amount = 4
 info_panel = NodePath("VBoxContainer/HBoxContainer/InfoPanel")
+heat_management_panel = NodePath("VBoxContainer/HBoxContainer/HeatManagementPanel")
+lateral_thrust_panel = NodePath("VBoxContainer/HBoxContainer2/LateralThrustersPanel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -193,3 +197,6 @@ libraries = {
 "": SubResource("AnimationLibrary_5cohx")
 }
 autoplay = "Booting"
+
+[connection signal="coolant_pumping_changed" from="VBoxContainer/HBoxContainer/HeatManagementPanel" to="." method="_on_heat_management_panel_coolant_pumping_changed"]
+[connection signal="engine_heated" from="VBoxContainer/HBoxContainer2/LateralThrustersPanel" to="." method="_on_lateral_thrusters_panel_engine_heated"]

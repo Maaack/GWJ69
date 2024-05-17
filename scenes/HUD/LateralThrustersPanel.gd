@@ -1,5 +1,8 @@
 @tool
+class_name LateralThrustersPanel
 extends HUDPanel
+
+signal engine_heated
 
 const WALK_DIRECTION_CHANGE_CHANCE : float = 0.1
 
@@ -24,6 +27,7 @@ const WALK_DIRECTION_CHANGE_CHANCE : float = 0.1
 
 @export var noise_texture : NoiseTexture2D 
 @export var noise_force_mod : float = 1.0
+@export var drift_force_mod : float = 1.0
 @export var engine_charge : int = 0 :
 	set(value):
 		if value < 0  : value = 0
@@ -100,18 +104,21 @@ func _update_state():
 
 func _on_tick_timer_timeout():
 	_update_state()
+	var desired_charge = round(thrust_vector.length())
+	if desired_charge > 0 and engine_charge > desired_charge:
+		target_offset += thrust_vector
+		engine_charge -= desired_charge
+		engine_heated.emit()
+
+func _on_drift_tick_timer_timeout():
 	var x_noise_pixel = _get_x_noise_pixel()
 	var y_noise_pixel = _get_y_noise_pixel()
 	var x_effect = (noise_image.get_pixelv(x_noise_pixel).r * 2) - 1
 	var y_effect = (noise_image.get_pixelv(y_noise_pixel).r * 2) - 1
-	var total_noise_force = Vector2(x_effect, y_effect) * noise_force_mod
+	var total_noise_force = Vector2(x_effect, y_effect)
+	total_noise_force *= noise_force_mod
+	total_noise_force *= drift_force_mod
 	target_offset += total_noise_force
-
-func _process(delta):
-	var desired_charge = round(thrust_vector.length())
-	if engine_charge > desired_charge:
-		target_offset += thrust_vector
-		engine_charge -= desired_charge
 
 func _on_up_button_button_down():
 	thrust_vector += Vector2.UP
@@ -138,4 +145,5 @@ func _on_down_button_button_up():
 	thrust_vector -= Vector2.DOWN
 
 func _on_recharge_tick_timer_timeout():
+	if round(thrust_vector.length()) > 0: return
 	engine_charge += engine_recharge_speed
