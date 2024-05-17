@@ -1,5 +1,9 @@
 @tool
+class_name SystemHeatMeter
 extends VBoxContainer
+
+signal up_button_pressed
+signal down_button_pressed
 
 const MAX_SYSTEM_LABEL_LENGTH : int = 4
 const MAX_COOLANT_LEVEL : int = 10
@@ -40,10 +44,10 @@ var shortened_name : String :
 			%SystemLabel.text = shortened_name
 
 func _on_up_button_pressed():
-	coolant_level += 1
+	up_button_pressed.emit()
 
 func _on_down_button_pressed():
-	coolant_level -= 1
+	down_button_pressed.emit()
 
 func _ready():
 	system_name = system_name
