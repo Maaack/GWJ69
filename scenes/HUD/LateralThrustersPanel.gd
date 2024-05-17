@@ -92,7 +92,6 @@ func _get_y_noise_pixel() -> Vector2i:
 	return y_noise_pixel
 
 func _on_tick_timer_timeout():
-	engine_charge += engine_recharge_speed
 	var x_noise_pixel = _get_x_noise_pixel()
 	var y_noise_pixel = _get_y_noise_pixel()
 	var x_effect = (noise_image.get_pixelv(x_noise_pixel).r * 2) - 1
@@ -129,3 +128,6 @@ func _on_down_button_button_down():
 
 func _on_down_button_button_up():
 	thrust_vector -= Vector2.DOWN
+
+func _on_recharge_tick_timer_timeout():
+	engine_charge += engine_recharge_speed

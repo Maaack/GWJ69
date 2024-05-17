@@ -173,6 +173,10 @@ vertical_alignment = 2
 wait_time = 0.5
 autostart = true
 
+[node name="RechargeTickTimer" type="Timer" parent="." index="5"]
+wait_time = 0.25
+autostart = true
+
 [connection signal="button_down" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/UpButton" to="." method="_on_up_button_button_down"]
 [connection signal="button_up" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/UpButton" to="." method="_on_up_button_button_up"]
 [connection signal="pressed" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/UpButton" to="." method="_on_up_button_pressed"]
@@ -186,3 +190,4 @@ autostart = true
 [connection signal="button_up" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/DownButton" to="." method="_on_down_button_button_up"]
 [connection signal="pressed" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/DownButton" to="." method="_on_down_button_pressed"]
 [connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]
+[connection signal="timeout" from="RechargeTickTimer" to="." method="_on_recharge_tick_timer_timeout"]
