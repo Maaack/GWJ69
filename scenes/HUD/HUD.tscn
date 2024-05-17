@@ -101,7 +101,7 @@ _data = {
 "RESET": SubResource("Animation_q14gu")
 }
 
-[node name="HUD" type="Control" node_paths=PackedStringArray("hud_panels")]
+[node name="HUD" type="Control" node_paths=PackedStringArray("hud_panels", "info_panel")]
 material = SubResource("ShaderMaterial_d6wex")
 layout_mode = 3
 anchors_preset = 15
@@ -112,6 +112,7 @@ grow_vertical = 2
 script = ExtResource("2_5wier")
 hud_panels = [NodePath("VBoxContainer/HBoxContainer/InfoPanel"), NodePath("VBoxContainer/HBoxContainer/HeatManagementPanel"), NodePath("VBoxContainer/HBoxContainer2/LateralThrustersPanel"), NodePath("VBoxContainer/HBoxContainer2/HUDPanel2")]
 panel_boot_delay = 1.0
+info_panel = NodePath("VBoxContainer/HBoxContainer/InfoPanel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

@@ -1,10 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://8mvfyal77oxi"]
+[gd_scene load_steps=3 format=3 uid="uid://8mvfyal77oxi"]
 
 [ext_resource type="PackedScene" uid="uid://cim7s3ldpnh8t" path="res://scenes/HUD/HUDPanel.tscn" id="1_j5k5e"]
+[ext_resource type="Script" path="res://scenes/HUD/InfoPanel.gd" id="2_kyrvl"]
 
 [node name="InfoPanel" instance=ExtResource("1_j5k5e")]
+script = ExtResource("2_kyrvl")
+radius_km = 4.4312e+08
+distance_km = 1.6e+09
+elapsed_local_time = 0.0
+elapsed_station_time = 0.0
 
 [node name="BlackHoleInfo" type="RichTextLabel" parent="MarginContainer/Control" index="0"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,8 +20,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_separation = 8
 text = "Mass: 150 Million Suns
-Radius: 443.12 Gigameters
-Distance: 1.6 Terameters
+Radius: 443.1 Gigameters
+Distance: 1.2 Terameters
 Elapsed Time: 
 Local    -  00:00:00
 Station  -  00:00:00

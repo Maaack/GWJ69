@@ -283,3 +283,6 @@ libraries = {
 "": SubResource("AnimationLibrary_btr5u")
 }
 autoplay = "Booting"
+
+[connection signal="distance_changed" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_distance_changed"]
+[connection signal="time_changed" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_time_changed"]

@@ -31,3 +31,9 @@ func _on_level_loader_level_load_started():
 func _unhandled_input(event):
 	if event.is_action_pressed(&"ui_hide"):
 		%HUDViewportContainer.visible = !%HUDViewportContainer.visible
+
+func _on_game_world_distance_changed(distance_km):
+	%HUD.set_distance(distance_km)
+
+func _on_game_world_time_changed(local_time):
+	%HUD.set_local_time(local_time)
