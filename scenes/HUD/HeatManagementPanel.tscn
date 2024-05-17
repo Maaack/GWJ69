@@ -7,6 +7,9 @@
 [node name="HeatManagementPanel" node_paths=PackedStringArray("heat_meter_container") instance=ExtResource("1_tliqr")]
 script = ExtResource("2_frbv2")
 coolant_reserve = 10
+overall_heat_level = 7
+heat_change_time = 20.0
+heat_change_randomness = 20.0
 heat_meter_container = NodePath("MarginContainer/Control/GridContainer/HBoxContainer")
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/Control" index="0"]
@@ -36,14 +39,17 @@ theme_override_constants/separation = 8
 [node name="SystemHeatMeter" parent="MarginContainer/Control/GridContainer/HBoxContainer" index="0" instance=ExtResource("2_upvy8")]
 layout_mode = 2
 system_name = "Reactor"
-heat_level = 4
 
 [node name="SystemHeatMeter2" parent="MarginContainer/Control/GridContainer/HBoxContainer" index="1" instance=ExtResource("2_upvy8")]
 layout_mode = 2
 system_name = "Engine"
-heat_level = 3
 
 [node name="SystemHeatMeter3" parent="MarginContainer/Control/GridContainer/HBoxContainer" index="2" instance=ExtResource("2_upvy8")]
 layout_mode = 2
 system_name = "Hull"
-heat_level = 3
+
+[node name="HeatChangeTimer" type="Timer" parent="." index="4"]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="HeatChangeTimer" to="." method="_on_heat_change_timer_timeout"]
