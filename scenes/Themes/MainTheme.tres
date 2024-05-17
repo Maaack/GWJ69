@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://23pdc2r50pw1"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://23pdc2r50pw1"]
 
 [ext_resource type="StyleBox" uid="uid://cfkf31205magg" path="res://scenes/HUD/HUDPanelStyleBox.tres" id="1_7jvm1"]
 [ext_resource type="FontFile" uid="uid://e2vjqqicral5" path="res://assets/fonts/Public_Pixel_Font_1_2/PublicPixel.ttf" id="1_x6ymh"]
@@ -38,6 +38,23 @@ border_blend = true
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87ttk"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="Gradient" id="Gradient_gsu15"]
 offsets = PackedFloat32Array(0, 0.0827068, 0.52381, 0.929825)
@@ -101,6 +118,13 @@ corner_radius_bottom_right = 1
 corner_radius_bottom_left = 128
 corner_detail = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7v88q"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0, 0, 0, 0.941176)
+
 [resource]
 default_font = ExtResource("1_x6ymh")
 Button/colors/font_color = Color(1, 1, 1, 1)
@@ -113,6 +137,8 @@ Button/styles/focus = SubResource("StyleBoxFlat_i678b")
 Button/styles/hover = SubResource("StyleBoxFlat_i678b")
 Button/styles/normal = SubResource("StyleBoxFlat_qcavm")
 Button/styles/pressed = SubResource("StyleBoxFlat_2k0pd")
+GameTipLabel/base_type = &"Label"
+GameTipLabel/styles/normal = SubResource("StyleBoxFlat_87ttk")
 HeatMeter/base_type = &"ProgressBar"
 HeatMeter/styles/fill = SubResource("StyleBoxTexture_e14sa")
 Label/constants/line_spacing = 16
@@ -126,3 +152,4 @@ PanelTopLeft/styles/panel = SubResource("StyleBoxFlat_ikl8e")
 PanelTopRight/base_type = &"Panel"
 PanelTopRight/styles/panel = SubResource("StyleBoxFlat_2kh16")
 RichTextLabel/constants/line_separation = 16
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_7v88q")

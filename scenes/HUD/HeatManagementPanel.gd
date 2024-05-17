@@ -7,6 +7,7 @@ Reserve: %d"
 @export var coolant_reserve : int :
 	set(value):
 		coolant_reserve = value
+		_update_flush_button()
 		if is_inside_tree():
 			%CoolantLabel.text = COOLANT_STRING % coolant_reserve
 @export var overall_heat_level : int
@@ -53,6 +54,10 @@ func cycle_heat_levels():
 				heat_meter.heat_level = 0
 	$HeatChangeTimer.start(_get_next_heat_change_time())
 
+func _update_flush_button():
+	if not is_inside_tree(): return
+	%FlushButton.disabled = coolant_reserve < 1 or (not $FlushCooldownTimer.is_stopped())
+
 func _on_heat_change_timer_timeout():
 	cycle_heat_levels()
 
@@ -71,3 +76,21 @@ func _update_state():
 
 func _on_tick_timer_timeout():
 	_update_state()
+
+func _on_flush_cooldown_timer_timeout():
+	_update_flush_button()
+
+func _flush_systems():
+	for heat_meter in heat_meter_container.get_children():
+		if heat_meter is SystemHeatMeter:
+			heat_meter.temperature *= 0.5
+
+func _flush_coolant():
+	coolant_reserve -= 1
+
+func _on_flush_button_pressed():
+	if coolant_reserve > 1:
+		_flush_systems()
+		_flush_coolant()
+		$FlushCooldownTimer.start()
+		_update_flush_button()
