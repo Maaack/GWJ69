@@ -37,10 +37,10 @@ danger_offset_length = 40.0
 noise_texture = SubResource("NoiseTexture2D_mocu8")
 noise_force_mod = 4.0
 drift_force_mod = 1.0
-engine_charge = 200
-engine_max_charge = 300
+engine_charge = 0
+engine_max_charge = 100
 engine_force_mod = 2.0
-engine_recharge_speed = 3
+engine_recharge_speed = 1
 good_color = Color(0.0625162, 1, 0.0625162, 1)
 fine_color = Color(1, 1, 0.0627451, 1)
 
@@ -171,8 +171,6 @@ size_flags_vertical = 1
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_styles/fill = SubResource("StyleBoxFlat_asvhi")
-max_value = 300.0
-value = 200.0
 fill_mode = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/Control/HBoxContainer" index="2"]
