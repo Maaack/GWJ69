@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://bmv8sswk6pfvc"]
+[gd_scene load_steps=25 format=3 uid="uid://bmv8sswk6pfvc"]
 
 [ext_resource type="Script" path="res://scenes/GameScene/GameUI.gd" id="1_jnhpe"]
 [ext_resource type="PackedScene" uid="uid://duj4lynj4vxua" path="res://scenes/WinScreen/ReturnScreen.tscn" id="2_0qyvn"]
 [ext_resource type="PackedScene" uid="uid://phxpbd0sgit8" path="res://scenes/LoseScreen/LoseScreen.tscn" id="3_hi21a"]
+[ext_resource type="PackedScene" uid="uid://devt5qa5dx2q4" path="res://scenes/WinScreen/LeapScreen.tscn" id="3_phpr6"]
 [ext_resource type="Script" path="res://addons/maaacks_game_template/extras/scripts/PauseMenuController.gd" id="4_23cc5"]
 [ext_resource type="Shader" path="res://assets/shaders/nebula.gdshader" id="4_li3o2"]
 [ext_resource type="PackedScene" uid="uid://h168f2vvmu1l" path="res://scenes/DecisionScreen/DecisionScreen.tscn" id="4_ngoas"]
@@ -190,6 +191,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jnhpe")
 return_scene = ExtResource("2_0qyvn")
+leap_scene = ExtResource("3_phpr6")
 lose_scene = ExtResource("3_hi21a")
 decision_scene = ExtResource("4_ngoas")
 
@@ -230,6 +232,7 @@ render_target_update_mode = 4
 script = ExtResource("9_88l22")
 
 [node name="GameWorld" parent="ViewportContainer/ConfigurableSubViewport" instance=ExtResource("9_118j6")]
+unique_name_in_owner = true
 ship_moving_flag = true
 
 [node name="InputDisplayLabel" type="Label" parent="."]
@@ -289,6 +292,7 @@ autoplay = "Booting"
 
 [connection signal="distance_changed" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_distance_changed"]
 [connection signal="recording_recovered" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_recording_recovered"]
+[connection signal="ship_dove" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_ship_dove"]
 [connection signal="ship_returned" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_ship_returned"]
 [connection signal="target_reached" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_target_reached"]
 [connection signal="time_changed" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_time_changed"]

@@ -6,6 +6,7 @@ enum GameChoice{
 }
 
 @export var return_scene : PackedScene
+@export var leap_scene : PackedScene
 @export var lose_scene : PackedScene
 @export var decision_scene : PackedScene
 
@@ -35,6 +36,7 @@ func _on_game_choice_made(choice : int):
 	match(choice):
 		GameChoice.LEAP:
 			print("chose leap")
+			%GameWorld.leap()
 			pass
 		GameChoice.RETURN:
 			print("chose return")
@@ -51,6 +53,9 @@ func _on_game_world_target_reached():
 func _on_game_world_ship_returned():
 	InGameMenuController.open_menu(return_scene, get_viewport())
 
+func _on_game_world_ship_dove():
+	InGameMenuController.open_menu(leap_scene, get_viewport())
+
 func _on_game_world_recording_recovered(transcript):
-	print(transcript)
 	%HUD.read_transcript(transcript)
+

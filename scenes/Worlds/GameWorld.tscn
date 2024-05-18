@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhq0r3qqbxofl"]
+[gd_scene load_steps=14 format=3 uid="uid://bhq0r3qqbxofl"]
 
 [ext_resource type="Script" path="res://scenes/Worlds/GameWorld.gd" id="1_eceq6"]
 [ext_resource type="PackedScene" uid="uid://djjs0ycv4u1tm" path="res://scenes/Worlds/BlackHole.tscn" id="1_pookx"]
@@ -21,9 +21,17 @@ height = 0.1
 radial_segments = 16
 rings = 8
 
-[sub_resource type="Curve3D" id="Curve3D_801v1"]
+[sub_resource type="Curve3D" id="Curve3D_jgewc"]
 _data = {
-"points": PackedVector3Array(-6.77596, 0, 0.099679, 5, 0, 0, 0, 0, 8.563, 5, 0, 0, -5, 0, 0, 0, 0, -1.572, -5, 0, 0, 5, 0, 0, -0.00686997, 0, 8.56275),
+"points": PackedVector3Array(-6.77596, 0, 0.099679, 5, 0, 0, 0, 0, 8.563, 5, 0, 0, -5, 0, 0, 0, 0, -1.572, -5, 0, 0, 5, 0, 0, 0, 0, 8.563),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+up_vector_enabled = false
+
+[sub_resource type="Curve3D" id="Curve3D_pkb5n"]
+_data = {
+"points": PackedVector3Array(-6.77596, 0, 0.099679, 1.25, 0, 0, 0, 0, 0.5, 1.25, 0, 0, -1.25, 0, 0, 0, 0, -1.572, -1.25, 0, 0, 5, 0, 0, 0, 0, 0.5),
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
@@ -68,6 +76,7 @@ On the bright side, from my perspective, it'll only be one more day."])
 primary_camera = NodePath("Camera3D")
 camera_target = NodePath("BlackHole")
 camera_target_offset = 2.0
+camera_reverse_offset = 4.0
 singularity = NodePath("BlackHole")
 edge_marker = NodePath("Marker3D")
 schwarzschild_radius_km = 4.4312e+08
@@ -93,7 +102,7 @@ draw_pass_1 = SubResource("SphereMesh_7gw13")
 
 [node name="Path3D" type="Path3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.999083, 0.0428173, 0, -0.0428173, 0.999083, 0, 0.025, 0)
-curve = SubResource("Curve3D_801v1")
+curve = SubResource("Curve3D_jgewc")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
 unique_name_in_owner = true
@@ -103,6 +112,10 @@ transform = Transform3D(0.999997, 0, 0, 0, 1, 0, 0, 0, 0.999997, 0, 0, 0)
 remote_path = NodePath("../../../Camera3D")
 update_rotation = false
 update_scale = false
+
+[node name="LeapPath3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999083, 0.0428173, 0, -0.0428173, 0.999083, 0, 0.025, 0)
+curve = SubResource("Curve3D_pkb5n")
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.57057)

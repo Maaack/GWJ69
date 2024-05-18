@@ -4,11 +4,14 @@ extends HUDPanel
 
 const INFO_STRING : String = "Mass: 150 Million Suns
 Radius: %s
-Distance: %s
+%s: %s
 Elapsed Time: 
 Local    -  %s
 Station  -  %s
 0.0015147628 sec/sec"
+
+const DISTANCE_STRING = "Distance"
+const DEPTH_STRING = "Depth"
 
 const YEAR_SECONDS : float = 31556952
 const MONTH_SECONDS : float = 2629746
@@ -43,6 +46,10 @@ const MEGA_KM_AMOUNT : float = 1000
 func _get_km_string(km : float) -> String:
 	var unit : String
 	var unit_amount : float
+	var sign_string : String = ""
+	if km < 0:
+		sign_string = "-"
+	km = abs(km)
 	if km >= TERA_KM_AMOUNT:
 		unit = "Tera"
 		unit_amount = km / TERA_KM_AMOUNT
@@ -56,9 +63,9 @@ func _get_km_string(km : float) -> String:
 		unit = "Kilo"
 		unit_amount = km
 	if unit_amount >= 100.0:
-		return "%.f %smeters" % [unit_amount, unit]
+		return "%s%.f %smeters" % [sign_string, unit_amount, unit]
 	else:
-		return "%.1f %smeters" % [unit_amount, unit]
+		return "%s%.1f %smeters" % [sign_string, unit_amount, unit]
 
 
 func _get_time_string(elapsed_time : float) -> String:
@@ -98,4 +105,9 @@ var distance_string : String :
 
 func _update_black_hole_info() -> void:
 		if is_inside_tree():
-			%BlackHoleInfo.text = INFO_STRING % [radius_string, distance_string, elapsed_local_time_string, elapsed_station_time_string]
+			var dist_or_depth : String
+			if distance_km - radius_km < 0:
+				dist_or_depth = DEPTH_STRING
+			else:
+				dist_or_depth = DISTANCE_STRING
+			%BlackHoleInfo.text = INFO_STRING % [radius_string, dist_or_depth, distance_string, elapsed_local_time_string, elapsed_station_time_string]

@@ -145,25 +145,25 @@ func _on_up_button_button_down():
 	thrust_vector += Vector2.UP
 
 func _on_up_button_button_up():
-	thrust_vector -= Vector2.UP
+	thrust_vector = Vector2.ZERO
 
 func _on_left_button_button_down():
 	thrust_vector += Vector2.LEFT
 
 func _on_left_button_button_up():
-	thrust_vector -= Vector2.LEFT
+	thrust_vector = Vector2.ZERO
 
 func _on_right_button_button_down():
 	thrust_vector += Vector2.RIGHT
 
 func _on_right_button_button_up():
-	thrust_vector -= Vector2.RIGHT
+	thrust_vector = Vector2.ZERO
 
 func _on_down_button_button_down():
 	thrust_vector += Vector2.DOWN
 
 func _on_down_button_button_up():
-	thrust_vector -= Vector2.DOWN
+	thrust_vector = Vector2.ZERO
 
 func _on_recharge_tick_timer_timeout():
 	if round(thrust_vector.length()) > 0: return
