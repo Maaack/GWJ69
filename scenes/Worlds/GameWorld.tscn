@@ -55,7 +55,7 @@ process_material = ExtResource("3_i0xhl")
 draw_pass_1 = SubResource("SphereMesh_7gw13")
 
 [node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.999083, 0.0428173, 0, -0.0428173, 0.999083, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.999083, 0.0428173, 0, -0.0428173, 0.999083, 0, 0.025, 0)
 curve = SubResource("Curve3D_801v1")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
@@ -66,3 +66,7 @@ transform = Transform3D(0.999997, 0, 0, 0, 1, 0, 0, 0, 0.999997, 0, 0, 0)
 remote_path = NodePath("../../../Camera3D")
 update_rotation = false
 update_scale = false
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.57057)
+gizmo_extents = 2.0
