@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://crs8a5o6htobi"]
+
+[ext_resource type="PackedScene" uid="uid://cim7s3ldpnh8t" path="res://scenes/HUD/HUDPanel.tscn" id="1_7rro2"]
+[ext_resource type="Script" path="res://scenes/HUD/LogPanel.gd" id="2_cm4ug"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5dyt"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 128
+corner_detail = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n6h1c"]
+
+[node name="LogPanel" instance=ExtResource("1_7rro2")]
+script = ExtResource("2_cm4ug")
+full_string = "[p align=right] [/p][p align=right] [/p][p align=right] [/p][p align=right] [/p][p align=right] [/p][p align=right] [/p]"
+chars_per_print = 1
+end_of_recording_text = "[END OF RECORDING]"
+
+[node name="Panel" type="Panel" parent="MarginContainer/Control" index="0"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g5dyt")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Control/Panel" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="LogLabel" type="RichTextLabel" parent="MarginContainer/Control/Panel/MarginContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_n6h1c")
+bbcode_enabled = true
+text = "[right][p align=right] [/p][p align=right] [/p][p align=right] [/p][p align=right] [/p][p align=right] [/p][p align=right] [/p][/right]"
+scroll_following = true
+
+[node name="PrintTimer" type="Timer" parent="." index="5"]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="PrintTimer" to="." method="_on_print_timer_timeout"]
