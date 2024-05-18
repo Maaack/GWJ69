@@ -39,7 +39,7 @@ up_vector_enabled = false
 
 [node name="GameWorld" type="Node3D" node_paths=PackedStringArray("primary_camera", "camera_target", "singularity", "edge_marker")]
 script = ExtResource("1_eceq6")
-ship_path_total_time = 120.0
+ship_path_total_time = 300.0
 recording_times = Array[float]([0.025, 0.05, 0.15, 0.35, 0.45])
 recording_streams = Array[AudioStream]([ExtResource("2_c36p1"), ExtResource("3_sbsdm"), ExtResource("4_ah7ui"), ExtResource("5_eop0j"), ExtResource("6_mvxvm")])
 recording_transcripts = Array[String](["Generator check.
