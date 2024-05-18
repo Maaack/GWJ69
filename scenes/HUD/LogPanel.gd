@@ -3,7 +3,9 @@ class_name LogPanel
 extends HUDPanel
 
 const LOG_LABEL_STRING = "[right]%s[/right]"
+const END_OF_RECORDING_STRING = "[END OF RECORDING]
 
+"
 
 @export var full_string : String :
 	set(value):
@@ -11,7 +13,7 @@ const LOG_LABEL_STRING = "[right]%s[/right]"
 		if is_inside_tree():
 			%LogLabel.text = LOG_LABEL_STRING % [full_string]
 @export var chars_per_print : int = 1
-@export var end_of_recording_text : String = "[END OF RECORDING]"
+@export_multiline var end_of_recording_text : String = END_OF_RECORDING_STRING
 
 var text_buffer : String
 

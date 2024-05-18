@@ -50,3 +50,7 @@ func _on_game_world_target_reached():
 
 func _on_game_world_ship_returned():
 	InGameMenuController.open_menu(return_scene, get_viewport())
+
+func _on_game_world_recording_recovered(transcript):
+	print(transcript)
+	%HUD.read_transcript(transcript)

@@ -230,6 +230,7 @@ render_target_update_mode = 4
 script = ExtResource("9_88l22")
 
 [node name="GameWorld" parent="ViewportContainer/ConfigurableSubViewport" instance=ExtResource("9_118j6")]
+ship_moving_flag = true
 
 [node name="InputDisplayLabel" type="Label" parent="."]
 layout_mode = 1
@@ -287,6 +288,7 @@ libraries = {
 autoplay = "Booting"
 
 [connection signal="distance_changed" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_distance_changed"]
+[connection signal="recording_recovered" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_recording_recovered"]
 [connection signal="ship_returned" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_ship_returned"]
 [connection signal="target_reached" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_target_reached"]
 [connection signal="time_changed" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_time_changed"]

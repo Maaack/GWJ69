@@ -9,6 +9,7 @@ signal system_failed
 @export var info_panel : InfoPanel
 @export var heat_management_panel : HeatManagementPanel
 @export var lateral_thrust_panel : LateralThrustersPanel
+@export var log_panel : LogPanel
 
 func _ready():
 	for hud_panel in hud_panels:
@@ -33,3 +34,6 @@ func _on_heat_management_panel_coolant_pumping_changed(current_amount):
 
 func _on_lateral_thrusters_panel_engine_heated():
 	heat_management_panel.heat_engine(engine_heat_amount)
+
+func read_transcript(transcript : String):
+	log_panel.add_recording(transcript)

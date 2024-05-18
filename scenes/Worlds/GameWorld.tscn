@@ -1,9 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhq0r3qqbxofl"]
+[gd_scene load_steps=13 format=3 uid="uid://bhq0r3qqbxofl"]
 
 [ext_resource type="Script" path="res://scenes/Worlds/GameWorld.gd" id="1_eceq6"]
 [ext_resource type="PackedScene" uid="uid://djjs0ycv4u1tm" path="res://scenes/Worlds/BlackHole.tscn" id="1_pookx"]
+[ext_resource type="AudioStream" uid="uid://dvu75i8xs2qvp" path="res://assets/sfx/Horizon_VO1.mp3" id="2_c36p1"]
 [ext_resource type="Environment" uid="uid://cb8ah5k7lnh1y" path="res://scenes/Worlds/MenuEnvironment.tres" id="2_fd475"]
 [ext_resource type="Material" uid="uid://b0mrle8kix5ro" path="res://scenes/Worlds/StarSphereParticleProcess.tres" id="3_i0xhl"]
+[ext_resource type="AudioStream" uid="uid://dg10cn6ctonbo" path="res://assets/sfx/Horizon_VO2.mp3" id="3_sbsdm"]
+[ext_resource type="AudioStream" uid="uid://c376rdgpoq0qh" path="res://assets/sfx/Horizon_VO3.mp3" id="4_ah7ui"]
+[ext_resource type="AudioStream" uid="uid://d4bdrpbythy6w" path="res://assets/sfx/Horizon_VO4.mp3" id="5_eop0j"]
+[ext_resource type="AudioStream" uid="uid://bdb8eix3fbypb" path="res://assets/sfx/Horizon_VO5.mp3" id="6_mvxvm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dh5y7"]
 emission_enabled = true
@@ -24,10 +29,42 @@ _data = {
 point_count = 3
 up_vector_enabled = false
 
-[node name="GameWorld" type="Node3D" node_paths=PackedStringArray("ship_path_follow", "primary_camera", "camera_target", "singularity", "edge_marker")]
+[node name="GameWorld" type="Node3D" node_paths=PackedStringArray("primary_camera", "camera_target", "singularity", "edge_marker")]
 script = ExtResource("1_eceq6")
-ship_path_follow = NodePath("Path3D/PathFollow3D")
 ship_path_total_time = 120.0
+recording_times = Array[float]([0.025, 0.05, 0.15, 0.35, 0.45])
+recording_streams = Array[AudioStream]([ExtResource("2_c36p1"), ExtResource("3_sbsdm"), ExtResource("4_ah7ui"), ExtResource("5_eop0j"), ExtResource("6_mvxvm")])
+recording_transcripts = Array[String](["Generator check.
+Engines check.
+Radiators check.
+Safety systems check.
+All systems are go.
+And with that, I depart...
+Another overly curious scientist sacrificing themselves for humanity.
+With any luck, I'll be the last that'll ever need to.", "Generator check.
+Engines check.
+Radiators check.
+Safety systems check.
+This marks the first 24 hours of my journey. 
+I'm not far, but at the station, it's already been 25 hours.
+I've been gone for one extra hour.
+Sucks if anyone was there to miss me.", "All Generator lights are green.
+Engines running optimally.
+Radiator pumps are all check.
+Safety systems, too.
+Day seven, for me. Just under one month at the station, though.
+It's only going to get more extreme from here.
+For what it's worth to science, everything about this ship is running perfectly.
+It's occupant however, not so much.", "Ship is fine.
+Like all humanity's finest ships, it almost works too well.
+Capable of taking each of us to the furthest corners of the universe.
+Dissolving humanity across the void.
+Until we are each our own island.
+I really thought I wanted my own island.", "I said my sacrifice was for science, but it wasn't. I was just angry.
+I was angry at the universe, because I always felt lonely in it.
+I really  wanted to find some kind of connection.
+Instead, I made a decision that likely doomed me to loneliness for eternity.
+On the bright side, from my perspective, it'll only be one more day."])
 primary_camera = NodePath("Camera3D")
 camera_target = NodePath("BlackHole")
 camera_target_offset = 2.0
@@ -59,7 +96,7 @@ transform = Transform3D(1, 0, 0, 0, 0.999083, 0.0428173, 0, -0.0428173, 0.999083
 curve = SubResource("Curve3D_801v1")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(-4.37112e-08, 0, -0.999996, 0, 1, 0, 0.999996, 0, -4.37112e-08, 0, 0, 8.563)
+unique_name_in_owner = true
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
 transform = Transform3D(0.999997, 0, 0, 0, 1, 0, 0, 0, 0.999997, 0, 0, 0)
@@ -70,3 +107,7 @@ update_scale = false
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.57057)
 gizmo_extents = 2.0
+
+[node name="RecordingPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_mvxvm")
