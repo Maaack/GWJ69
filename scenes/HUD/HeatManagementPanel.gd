@@ -3,6 +3,7 @@ class_name HeatManagementPanel
 extends HUDPanel
 
 signal coolant_pumping_changed(current_amount)
+signal coolant_flushed
 
 const COOLANT_STRING = "Coolant
 Control
@@ -101,6 +102,7 @@ func _flush_systems():
 
 func _flush_coolant():
 	coolant_reserve -= 1
+	coolant_flushed.emit()
 
 func _on_flush_button_pressed():
 	if coolant_reserve > 0:

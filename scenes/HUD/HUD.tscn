@@ -211,5 +211,6 @@ libraries = {
 }
 autoplay = "Booting"
 
+[connection signal="coolant_flushed" from="VBoxContainer/HBoxContainer/HeatManagementPanel" to="." method="_on_heat_management_panel_coolant_flushed"]
 [connection signal="coolant_pumping_changed" from="VBoxContainer/HBoxContainer/HeatManagementPanel" to="." method="_on_heat_management_panel_coolant_pumping_changed"]
 [connection signal="engine_heated" from="VBoxContainer/HBoxContainer2/LateralThrustersPanel" to="." method="_on_lateral_thrusters_panel_engine_heated"]

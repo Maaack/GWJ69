@@ -28,6 +28,7 @@ const WALK_DIRECTION_CHANGE_CHANCE : float = 0.1
 @export var noise_texture : NoiseTexture2D 
 @export var noise_force_mod : float = 1.0
 @export var drift_force_mod : float = 1.0
+@export var flushing_force_mod : float = 1.0
 @export var engine_charge : int = 0 :
 	set(value):
 		if value < 0  : value = 0
@@ -66,6 +67,15 @@ var direction_array : Array[Vector2i] = [
 	Vector2i.LEFT,
 	Vector2i.RIGHT,
 ]
+
+var flushing : bool = false
+var flush_vector : Vector2
+
+func flush_coolant():
+	if flushing: return
+	flushing = true
+	flush_vector = Vector2.from_angle(randf_range(0, 2 * PI)).normalized()
+	$FlushDriftTimer.start()
 
 func _ready():
 	super._ready()
@@ -127,6 +137,8 @@ func _on_drift_tick_timer_timeout():
 	var total_noise_force = Vector2(x_effect, y_effect)
 	total_noise_force *= noise_force_mod
 	total_noise_force *= drift_force_mod
+	if flushing:
+		total_noise_force += flush_vector * flushing_force_mod 
 	target_offset += total_noise_force
 
 func _on_up_button_button_down():
@@ -156,3 +168,6 @@ func _on_down_button_button_up():
 func _on_recharge_tick_timer_timeout():
 	if round(thrust_vector.length()) > 0: return
 	engine_charge += engine_recharge_speed
+
+func _on_flush_drift_timer_timeout():
+	flushing = false

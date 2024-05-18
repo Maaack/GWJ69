@@ -58,7 +58,9 @@ increase the ship's drift.
 
 Flushing permanently removes 
 one unit of coolant, and cuts
-system temperatures in half."
+system temperatures in half.
+This will cause the ship to 
+drift significantly."
 mouse_filter = 0
 mouse_default_cursor_shape = 16
 theme_type_variation = &"GameTipLabel"
@@ -91,7 +93,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="FlushCooldownTimer" type="Timer" parent="." index="7"]
-wait_time = 15.0
+wait_time = 20.0
 one_shot = true
 autostart = true
 

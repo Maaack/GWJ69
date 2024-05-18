@@ -37,6 +37,7 @@ danger_offset_length = 40.0
 noise_texture = SubResource("NoiseTexture2D_mocu8")
 noise_force_mod = 4.0
 drift_force_mod = 1.0
+flushing_force_mod = 24.0
 engine_charge = 0
 engine_max_charge = 100
 engine_force_mod = 2.0
@@ -220,6 +221,10 @@ autostart = true
 wait_time = 0.25
 autostart = true
 
+[node name="FlushDriftTimer" type="Timer" parent="." index="8"]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="button_down" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/UpButton" to="." method="_on_up_button_button_down"]
 [connection signal="button_up" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/UpButton" to="." method="_on_up_button_button_up"]
 [connection signal="pressed" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/UpButton" to="." method="_on_up_button_pressed"]
@@ -236,3 +241,4 @@ autostart = true
 [connection signal="timeout" from="DriftTickTimer" to="." method="_on_tick_timer_timeout"]
 [connection signal="timeout" from="DriftTickTimer" to="." method="_on_drift_tick_timer_timeout"]
 [connection signal="timeout" from="RechargeTickTimer" to="." method="_on_recharge_tick_timer_timeout"]
+[connection signal="timeout" from="FlushDriftTimer" to="." method="_on_flush_drift_timer_timeout"]

@@ -37,3 +37,6 @@ func _on_lateral_thrusters_panel_engine_heated():
 
 func read_transcript(transcript : String):
 	log_panel.add_recording(transcript)
+
+func _on_heat_management_panel_coolant_flushed():
+	lateral_thrust_panel.flush_coolant()
