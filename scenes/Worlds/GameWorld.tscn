@@ -18,7 +18,7 @@ rings = 8
 
 [sub_resource type="Curve3D" id="Curve3D_801v1"]
 _data = {
-"points": PackedVector3Array(-6.77596, 0, 0.099679, 5, 0, 0, 0, 0, 8.563, 5, 0, 0, -5, 0, 0, 0, 0, -1.579, -5, 0, 0, 5, 0, 0, -0.00686997, 0, 8.56275),
+"points": PackedVector3Array(-6.77596, 0, 0.099679, 5, 0, 0, 0, 0, 8.563, 5, 0, 0, -5, 0, 0, 0, 0, -1.572, -5, 0, 0, 5, 0, 0, -0.00686997, 0, 8.56275),
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
