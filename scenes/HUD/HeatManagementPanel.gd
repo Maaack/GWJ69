@@ -57,7 +57,10 @@ func cycle_heat_levels():
 	while(heat_meters.size() > 0):
 		heat_meter = heat_meters.pop_back()
 		if heat_meter is SystemHeatMeter:
-			if remaining_heat > 0:
+			if heat_meters.size() == 0:
+				heat_meter.heat_level = remaining_heat
+				remaining_heat = 0
+			elif remaining_heat > 0:
 				var system_heat = randi() % remaining_heat
 				heat_meter.heat_level = system_heat
 				remaining_heat -= system_heat
