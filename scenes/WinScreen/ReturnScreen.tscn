@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://duj4lynj4vxua"]
+
+[ext_resource type="PackedScene" uid="uid://dt5ses55itjy4" path="res://addons/maaacks_game_template/extras/scenes/WinScreen/WinScreen.tscn" id="1_hu5gm"]
+[ext_resource type="Script" path="res://scenes/WinScreen/WinScreen.gd" id="2_hgyof"]
+
+[node name="ReturnScreen" instance=ExtResource("1_hu5gm")]
+script = ExtResource("2_hgyof")
+next_scene = "res://scenes/EndCredits/EndCredits.tscn"
+main_menu_scene = "res://scenes/Menus/MainMenu/MainMenuWithAnimations.tscn"
+
+[node name="BackgroundColor" parent="." index="1"]
+color = Color(0, 0, 0, 0.815686)
+
+[node name="PanelContainer" parent="." index="3"]
+offset_left = -259.0
+offset_top = -238.0
+offset_right = 259.0
+offset_bottom = 238.0
+
+[node name="WinMessage" parent="PanelContainer/MarginContainer/VBoxContainer" index="0"]
+text = "You slingshotted yourself
+around the black hole and
+into the surrounding void.
+
+You touched the edge
+of time and space.
+
+And you found it cold..."
+
+[node name="ButtonsContainer" parent="PanelContainer/MarginContainer/VBoxContainer" index="1"]
+theme_override_constants/separation = 16

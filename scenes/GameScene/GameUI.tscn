@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://bmv8sswk6pfvc"]
+[gd_scene load_steps=24 format=3 uid="uid://bmv8sswk6pfvc"]
 
 [ext_resource type="Script" path="res://scenes/GameScene/GameUI.gd" id="1_jnhpe"]
-[ext_resource type="PackedScene" uid="uid://ca1yyin1kgjlr" path="res://scenes/WinScreen/WinScreen.tscn" id="2_vj612"]
+[ext_resource type="PackedScene" uid="uid://duj4lynj4vxua" path="res://scenes/WinScreen/ReturnScreen.tscn" id="2_0qyvn"]
 [ext_resource type="PackedScene" uid="uid://phxpbd0sgit8" path="res://scenes/LoseScreen/LoseScreen.tscn" id="3_hi21a"]
 [ext_resource type="Script" path="res://addons/maaacks_game_template/extras/scripts/PauseMenuController.gd" id="4_23cc5"]
 [ext_resource type="Shader" path="res://assets/shaders/nebula.gdshader" id="4_li3o2"]
+[ext_resource type="PackedScene" uid="uid://h168f2vvmu1l" path="res://scenes/DecisionScreen/DecisionScreen.tscn" id="4_ngoas"]
 [ext_resource type="PackedScene" uid="uid://d2ppfg1ro8tf0" path="res://scenes/Menus/PauseMenu/PauseMenu.tscn" id="5_gwwh7"]
 [ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/maaacks_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="7_kv7nd"]
 [ext_resource type="AudioStream" uid="uid://bd5wjptavohvd" path="res://assets/music/Horizon_loop.ogg" id="8_y7hac"]
@@ -188,8 +189,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jnhpe")
-win_scene = ExtResource("2_vj612")
+return_scene = ExtResource("2_0qyvn")
 lose_scene = ExtResource("3_hi21a")
+decision_scene = ExtResource("4_ngoas")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_c260h")
@@ -285,5 +287,7 @@ libraries = {
 autoplay = "Booting"
 
 [connection signal="distance_changed" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_distance_changed"]
+[connection signal="ship_returned" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_ship_returned"]
+[connection signal="target_reached" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_target_reached"]
 [connection signal="time_changed" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_time_changed"]
 [connection signal="system_failed" from="HUDViewportContainer/SubViewport/HUD" to="." method="_on_hud_system_failed"]

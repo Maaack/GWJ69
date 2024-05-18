@@ -1,7 +1,13 @@
 extends Control
 
-@export var win_scene : PackedScene
+enum GameChoice{
+	LEAP,
+	RETURN
+}
+
+@export var return_scene : PackedScene
 @export var lose_scene : PackedScene
+@export var decision_scene : PackedScene
 
 func _ready():
 	InGameMenuController.scene_tree = get_tree()
@@ -10,23 +16,6 @@ func _ready():
 
 func _on_level_lost():
 	InGameMenuController.open_menu(lose_scene, get_viewport())
-
-func _on_level_won():
-	$LevelLoader.advance_and_load_level()
-
-func _on_level_loader_level_loaded():
-	await $LevelLoader.current_level.ready
-	if $LevelLoader.current_level.has_signal("level_won"):
-		$LevelLoader.current_level.level_won.connect(_on_level_won)
-	if $LevelLoader.current_level.has_signal("level_lost"):
-		$LevelLoader.current_level.level_lost.connect(_on_level_lost)
-	$LoadingScreen.close()
-
-func _on_level_loader_levels_finished():
-	InGameMenuController.open_menu(win_scene, get_viewport())
-
-func _on_level_loader_level_load_started():
-	$LoadingScreen.reset()
 
 func _unhandled_input(event):
 	if event.is_action_pressed(&"ui_hide"):
@@ -40,3 +29,24 @@ func _on_game_world_time_changed(local_time):
 
 func _on_hud_system_failed():
 	_on_level_lost()
+
+func _on_game_choice_made(choice : int):
+	InGameMenuController.close_menu()
+	match(choice):
+		GameChoice.LEAP:
+			print("chose leap")
+			pass
+		GameChoice.RETURN:
+			print("chose return")
+			pass
+
+func _on_load_game_decision():
+	InGameMenuController.open_menu(decision_scene, get_viewport())
+	if InGameMenuController.current_menu.has_signal("choice_made"):
+		InGameMenuController.current_menu.choice_made.connect(_on_game_choice_made)
+
+func _on_game_world_target_reached():
+	_on_load_game_decision()
+
+func _on_game_world_ship_returned():
+	InGameMenuController.open_menu(return_scene, get_viewport())
