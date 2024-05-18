@@ -14,9 +14,7 @@ corner_detail = 1
 script = ExtResource("2_cm4ug")
 full_string = "[p align=right] [/p][p align=right] [/p][p align=right] [/p][p align=right] [/p][p align=right] [/p][p align=right] [/p]"
 chars_per_print = 1
-end_of_recording_text = "[END OF RECORDING]
-
-"
+end_of_recording_text = "[END OF RECORDING]"
 
 [node name="Panel" type="Panel" parent="MarginContainer/Control" index="0"]
 clip_children = 1
