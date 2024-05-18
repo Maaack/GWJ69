@@ -11,9 +11,8 @@ signal ship_returned
 @export var camera_target : Node3D
 @export var camera_target_offset : float = 1
 @export var singularity : Node3D
-@export var starting_distance_km : float
-
-@onready var starting_distance : float = primary_camera.position.distance_to(singularity.position)
+@export var edge_marker : Marker3D
+@export var schwarzschild_radius_km : float
 
 var target_reached_flag : bool = false
 var ship_returned_flag : bool = false
@@ -38,11 +37,15 @@ func _check_progress():
 func _get_camera_focus_point() -> Vector3:
 	return camera_target.position + Vector3.UP.cross(primary_camera.position).normalized() * camera_target_offset
 
+func _estimate_distance_km(node_position : Vector3):
+	var camera_distance := primary_camera.position.distance_to(singularity.position)
+	var camera_distance_ratio := camera_distance / edge_marker.position.distance_to(singularity.position)
+	return camera_distance_ratio * schwarzschild_radius_km
+
 func _process(delta):
 	elapsed_local_time += delta
 	if ship_path_total_time > 0.0:
 		ship_path_follow.progress_ratio += delta / ship_path_total_time
 		_check_progress()
 	primary_camera.look_at(_get_camera_focus_point())
-	var distance_ratio = primary_camera.position.distance_to(singularity.position) / starting_distance
-	distance_changed.emit(starting_distance_km * distance_ratio)
+	distance_changed.emit(_estimate_distance_km(primary_camera.position))

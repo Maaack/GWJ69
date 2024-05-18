@@ -24,7 +24,7 @@ _data = {
 point_count = 3
 up_vector_enabled = false
 
-[node name="GameWorld" type="Node3D" node_paths=PackedStringArray("ship_path_follow", "primary_camera", "camera_target", "singularity")]
+[node name="GameWorld" type="Node3D" node_paths=PackedStringArray("ship_path_follow", "primary_camera", "camera_target", "singularity", "edge_marker")]
 script = ExtResource("1_eceq6")
 ship_path_follow = NodePath("Path3D/PathFollow3D")
 ship_path_total_time = 120.0
@@ -32,7 +32,8 @@ primary_camera = NodePath("Camera3D")
 camera_target = NodePath("BlackHole")
 camera_target_offset = 2.0
 singularity = NodePath("BlackHole")
-starting_distance_km = 1.6e+09
+edge_marker = NodePath("Marker3D")
+schwarzschild_radius_km = 4.4312e+08
 
 [node name="BlackHole" parent="." instance=ExtResource("1_pookx")]
 transform = Transform3D(-0.808263, 0, 0.588822, 0, 1, 0, -0.588822, 0, -0.808263, 0, 0, 0)
