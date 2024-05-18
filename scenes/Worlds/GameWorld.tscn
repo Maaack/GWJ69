@@ -30,6 +30,7 @@ ship_path_follow = NodePath("Path3D/PathFollow3D")
 ship_path_total_time = 120.0
 primary_camera = NodePath("Camera3D")
 camera_target = NodePath("BlackHole")
+camera_target_offset = 2.0
 singularity = NodePath("BlackHole")
 starting_distance_km = 1.6e+09
 

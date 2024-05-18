@@ -9,6 +9,7 @@ signal ship_returned
 @export var ship_path_total_time : float = 0.0
 @export var primary_camera : Camera3D
 @export var camera_target : Node3D
+@export var camera_target_offset : float = 1
 @export var singularity : Node3D
 @export var starting_distance_km : float
 
@@ -34,11 +35,14 @@ func _check_progress():
 		target_reached.emit()
 		target_reached_flag = true
 
+func _get_camera_focus_point() -> Vector3:
+	return camera_target.position + Vector3.UP.cross(primary_camera.position).normalized() * camera_target_offset
+
 func _process(delta):
 	elapsed_local_time += delta
 	if ship_path_total_time > 0.0:
 		ship_path_follow.progress_ratio += delta / ship_path_total_time
 		_check_progress()
-	primary_camera.look_at(camera_target.position)
+	primary_camera.look_at(_get_camera_focus_point())
 	var distance_ratio = primary_camera.position.distance_to(singularity.position) / starting_distance
 	distance_changed.emit(starting_distance_km * distance_ratio)
