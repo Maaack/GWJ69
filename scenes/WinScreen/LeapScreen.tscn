@@ -21,13 +21,13 @@ offset_bottom = 238.0
 text = "You started this journey
 as the rescuer.
 
-It instead led you to take
-the greatest leap into
-danger of your life.
+Now are are taking 
+the greatest leap
+into the unknown
+that the universe
+has left for you.
 
-And it was, in fact,
-extremely dangerous,
-but the company was nice..."
+And you aren't alone."
 
 [node name="ButtonsContainer" parent="PanelContainer/MarginContainer/VBoxContainer" index="1"]
 theme_override_constants/separation = 16
