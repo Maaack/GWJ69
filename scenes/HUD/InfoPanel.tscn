@@ -24,5 +24,37 @@ Radius: 443.1 Gigameters
 Distance: 1.2 Terameters
 Elapsed Time: 
 Local    -  00:00:00
-Station  -  00:00:00
-0.0015147628 sec/sec"
+Station  -  00:00:00"
+
+[node name="Tooltip" type="Label" parent="MarginContainer/Control" index="1"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+offset_right = 28.0
+grow_vertical = 0
+size_flags_horizontal = 0
+tooltip_text = "Hide the UI with F1."
+mouse_filter = 0
+mouse_default_cursor_shape = 16
+theme_type_variation = &"GameTipLabel"
+text = "?"
+
+[node name="Tooltip2" type="Label" parent="MarginContainer/Control" index="2"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -28.0
+offset_bottom = 28.0
+grow_horizontal = 0
+size_flags_horizontal = 0
+tooltip_text = "Oh... an easter egg.
+You can skip the booting sequence
+by holding ` on start."
+mouse_filter = 0
+mouse_default_cursor_shape = 16
+theme_type_variation = &"GameTipLabel"
+text = "?"
