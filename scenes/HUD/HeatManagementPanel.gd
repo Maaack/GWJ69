@@ -109,6 +109,7 @@ func _on_flush_button_pressed():
 		_flush_systems()
 		_flush_coolant()
 		$FlushCooldownTimer.start()
+		$FlushCoolantPlayer.play()
 		_update_flush_button()
 
 func heat_engine(amount : int):
