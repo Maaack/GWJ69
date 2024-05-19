@@ -1,8 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://phxpbd0sgit8"]
+[gd_scene load_steps=4 format=3 uid="uid://phxpbd0sgit8"]
 
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/extras/scenes/LoseScreen/LoseScreen.tscn" id="1_wwhkc"]
+[ext_resource type="PackedScene" uid="uid://cp3p3kqcjh0me" path="res://addons/maaacks_game_template/extras/scenes/LoseScreen/LoseScreen.tscn" id="1_wwhkc"]
 [ext_resource type="Script" path="res://scenes/LoseScreen/LoseScreen.gd" id="2_e210l"]
+[ext_resource type="AudioStream" uid="uid://blsiaby03046i" path="res://assets/sfx/explosion.ogg" id="3_34bhj"]
 
 [node name="LoseScreen" instance=ExtResource("1_wwhkc")]
 script = ExtResource("2_e210l")
 main_menu_scene = "res://scenes/Menus/MainMenu/MainMenuWithAnimations.tscn"
+
+[node name="LoseMessage" parent="PanelContainer/MarginContainer/VBoxContainer" index="0"]
+text = "Your ship systems overheated,
+or
+your ship flew off-course,
+or
+both."
+
+[node name="ButtonsContainer" parent="PanelContainer/MarginContainer/VBoxContainer" index="1"]
+theme_override_constants/separation = 16
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource("3_34bhj")
+autoplay = true
