@@ -23,8 +23,9 @@ signal ship_dove
 @export var edge_marker : Marker3D
 @export var schwarzschild_radius_km : float
 @export var ship_moving_flag : bool = false
-@export var galaxy_spin_rate : float = 0.0000001
-var galaxy_spin_rate_mod : float = .5
+@export var galaxy_spin_rate_1 : float = 0.001
+@export var galaxy_spin_rate_2 : float = 0.001
+@export var galaxy_spin_rate_3 : float = 0.001
 
 var target_reached_flag : bool = false
 var ship_loop_completed : bool = false
@@ -52,7 +53,8 @@ func _get_station_time_ratio() -> float:
 	return pow(1.0 / (1.0 - sqrt(1 - distance_ratio)), 6)
 
 func _rotate_sky(delta : float):
-	$WorldEnvironment.environment.sky_rotation.y -= delta * galaxy_spin_rate * galaxy_spin_rate_mod
+	var total_rate = galaxy_spin_rate_1 * galaxy_spin_rate_2 * galaxy_spin_rate_3
+	$WorldEnvironment.environment.sky_rotation.y -= delta * total_rate
 
 func _play_next_event():
 	if _recording_streams.size() > 0 and _recording_times.size() > 0:
