@@ -1,14 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://h168f2vvmu1l"]
+[gd_scene load_steps=7 format=3 uid="uid://h168f2vvmu1l"]
 
 [ext_resource type="Script" path="res://scenes/DecisionScreen/DecisionScreen.gd" id="1_rcbp8"]
 [ext_resource type="Script" path="res://addons/maaacks_game_template/base/scripts/UISoundController.gd" id="2_qeoyn"]
+[ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/maaacks_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="2_ydeto"]
 [ext_resource type="Script" path="res://addons/maaacks_game_template/base/scripts/CaptureFocus.gd" id="3_7dyp3"]
+[ext_resource type="AudioStream" uid="uid://8axqibes1fu0" path="res://assets/music/Intense_Horizon_loop.ogg" id="3_a6fvf"]
 [ext_resource type="AudioStream" uid="uid://bpkjgha3qxm8w" path="res://assets/sfx/Horizon_VO6_dry.mp3" id="4_rdbqt"]
 
 [node name="DecisionScreen" type="CanvasLayer"]
 process_mode = 3
 layer = 10
 script = ExtResource("1_rcbp8")
+
+[node name="BackgroundMusicPlayer" parent="." instance=ExtResource("2_ydeto")]
+stream = ExtResource("3_a6fvf")
 
 [node name="UISoundController" type="Node" parent="."]
 script = ExtResource("2_qeoyn")
