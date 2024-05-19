@@ -95,11 +95,11 @@ text = "Leap"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_rdbqt")
 volume_db = 6.0
 autoplay = true
-bus = &"SFX"
+bus = &"Voice"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/ButtonsContainer/ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/ButtonsContainer/DiveButton" to="." method="_on_dive_button_pressed"]
