@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dwk808c1awui7"
+path="res://.godot/imported/SFX - 0043 - Audio - 3 big alarms.ogg-3ba9169c7737edf728625eb06968ecfd.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/SFX - 0043 - Audio - 3 big alarms.ogg"
+dest_files=["res://.godot/imported/SFX - 0043 - Audio - 3 big alarms.ogg-3ba9169c7737edf728625eb06968ecfd.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cim7s3ldpnh8t"]
+[gd_scene load_steps=19 format=3 uid="uid://cim7s3ldpnh8t"]
 
 [ext_resource type="Script" path="res://scenes/HUD/HUDPanel.gd" id="1_p2hio"]
+[ext_resource type="AudioStream" uid="uid://dwk808c1awui7" path="res://assets/sfx/SFX - 0043 - Audio - 3 big alarms.ogg" id="2_jhfod"]
+[ext_resource type="AudioStream" uid="uid://cxhijy61v6m5y" path="res://assets/sfx/SFX - 0053 - Audio - alarm.ogg" id="3_00uce"]
 
 [sub_resource type="Animation" id="Animation_42ka4"]
 resource_name = "Booting"
@@ -181,6 +183,196 @@ _data = {
 "RESET": SubResource("Animation_qlhbo")
 }
 
+[sub_resource type="Animation" id="Animation_1lkrm"]
+resource_name = "SAFE"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xjshi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fp6yh"]
+resource_name = "WARNING"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(1, 0.478431, 0, 1), Color(1, 1, 1, 1), Color(1, 0.478431, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_eueiw"]
+resource_name = "DANGER"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u7std"]
+_data = {
+"DANGER": SubResource("Animation_eueiw"),
+"RESET": SubResource("Animation_xjshi"),
+"SAFE": SubResource("Animation_1lkrm"),
+"WARNING": SubResource("Animation_fp6yh")
+}
+
+[sub_resource type="Animation" id="Animation_kh8v0"]
+resource_name = "SAFE"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/Control/WarningPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/Control/DangerPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_cuq07"]
+resource_name = "DANGER"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/Control/WarningPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/Control/DangerPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pdl5c"]
+resource_name = "WARNING"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/Control/WarningPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/Control/DangerPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_q8tce"]
+resource_name = "RESET"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/Control/WarningPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/Control/DangerPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sxw72"]
+_data = {
+"DANGER": SubResource("Animation_cuq07"),
+"RESET": SubResource("Animation_q8tce"),
+"SAFE": SubResource("Animation_kh8v0"),
+"WARNING": SubResource("Animation_pdl5c")
+}
+
 [node name="HUDPanel" type="Panel"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -215,6 +407,16 @@ libraries = {
 }
 autoplay = "Init"
 
+[node name="StateAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_u7std")
+}
+
+[node name="StateAnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sxw72")
+}
+
 [node name="CoverPanel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -237,6 +439,27 @@ vertical_alignment = 1
 [node name="DangerTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="CenterContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="WarningPlayer2D" type="AudioStreamPlayer2D" parent="CenterContainer/Control"]
+stream = ExtResource("2_jhfod")
+bus = &"SFX"
+
+[node name="DangerPlayer2D" type="AudioStreamPlayer2D" parent="CenterContainer/Control"]
+stream = ExtResource("3_00uce")
+bus = &"SFX"
 
 [connection signal="animation_finished" from="BootingAnimationPlayer" to="." method="_on_booting_animation_player_animation_finished"]
 [connection signal="timeout" from="DangerTimer" to="." method="_on_danger_timer_timeout"]

@@ -18,6 +18,7 @@ enum States{
 @export var danger_color : Color
 
 var booted : bool = false
+var _panel_state : States
 
 func boot():
 	if booted: return
@@ -36,19 +37,24 @@ func _on_booting_animation_player_animation_finished(anim_name : StringName):
 		booted = true
 
 func _update_panel():
+	if _panel_state == state : return
 	match(state):
 		States.SAFE:
-			self_modulate = Color.WHITE
+			$StateAnimationPlayer.play(&"SAFE")
+			$StateAnimationPlayer2.play(&"SAFE")
 			if not $DangerTimer.is_stopped():
 				$DangerTimer.stop()
 		States.WARNING:
-			self_modulate = warning_color
+			$StateAnimationPlayer.play(&"WARNING")
+			$StateAnimationPlayer2.play(&"WARNING")
 			if not $DangerTimer.is_stopped():
 				$DangerTimer.stop()
 		States.DANGER:
-			self_modulate = danger_color
+			$StateAnimationPlayer.play(&"DANGER")
+			$StateAnimationPlayer2.play(&"DANGER")
 			if $DangerTimer.is_stopped():
 				$DangerTimer.start()
+	_panel_state = state
 
 func _on_danger_timer_timeout():
 	system_failed.emit()
