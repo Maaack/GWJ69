@@ -1,16 +1,29 @@
 # Attribution
-## Collaborators
-
-### Programming / Design
-[Maaack](https://maaack.itch.io/)  
+## A Game By
+  
+[Marek Belski](https://maaack.itch.io/)  
 
 ### Music
+  
 [Jon Hatch](https://www.jonhatchmusic.com/)  
+
+### Voice Acting
+  
+[Traci Redmond](https://www.traciredmond.com/)
+
+### Writing, Programming, & Design  
+  
+[Marek Belski](https://maaack.itch.io/)  
 
 ## Sourced
 ### Black Hole Shader
 Author: [Celyk](https://github.com/celyk)  
 Source: [godotshaders.com](https://godotshaders.com/author/celyk/)  
+License: [CC BY 4.0 DEED](https://creativecommons.org/licenses/by/4.0/deed.en)  
+
+### Sky Shader
+Author: [Celyk](https://github.com/celyk)  
+Source: [godotshaders.com](https://godotshaders.com/shader/quick-sky/)  
 License: [CC BY 4.0 DEED](https://creativecommons.org/licenses/by/4.0/deed.en)  
 
 ### Godot Wild Jam Logos

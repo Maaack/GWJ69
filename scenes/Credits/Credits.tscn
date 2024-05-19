@@ -8,24 +8,33 @@ script = ExtResource("2_il4pa")
 attribution_file_path = "res://ATTRIBUTION.md"
 scroll_active = true
 
-[node name="HeaderSpace" parent="ScrollContainer/VBoxContainer" index="0"]
-custom_minimum_size = Vector2(0, 648)
-
 [node name="CreditsLabel" parent="ScrollContainer/VBoxContainer" index="1"]
-custom_minimum_size = Vector2(1152, 0)
 text = "[center]
-[font_size=48]Collaborators[/font_size]
-
-[font_size=32]Programming / Design[/font_size]
-[url=https://maaack.itch.io/]Maaack[/url]  
+[font_size=48]A Game By[/font_size]
+  
+[url=https://maaack.itch.io/]Marek Belski[/url]  
 
 [font_size=32]Music[/font_size]
+  
 [url=https://www.jonhatchmusic.com/]Jon Hatch[/url]  
+
+[font_size=32]Voice Acting[/font_size]
+  
+[url=https://www.traciredmond.com/]Traci Redmond[/url]
+
+[font_size=32]Writing, Programming, & Design  [/font_size]
+  
+[url=https://maaack.itch.io/]Marek Belski[/url]  
 
 [font_size=48]Sourced[/font_size]
 [font_size=32]Black Hole Shader[/font_size]
 Author: [url=https://github.com/celyk]Celyk[/url]  
 Source: [url=https://godotshaders.com/author/celyk/]godotshaders.com[/url]  
+License: [url=https://creativecommons.org/licenses/by/4.0/deed.en]CC BY 4.0 DEED[/url]  
+
+[font_size=32]Sky Shader[/font_size]
+Author: [url=https://github.com/celyk]Celyk[/url]  
+Source: [url=https://godotshaders.com/shader/quick-sky/]godotshaders.com[/url]  
 License: [url=https://creativecommons.org/licenses/by/4.0/deed.en]CC BY 4.0 DEED[/url]  
 
 [font_size=32]Godot Wild Jam Logos[/font_size]
@@ -49,6 +58,3 @@ Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]M
 Source: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]  
 License: [url=LICENSE.txt]MIT License[/url]  
 [/center]"
-
-[node name="FooterSpace" parent="ScrollContainer/VBoxContainer" index="2"]
-custom_minimum_size = Vector2(0, 648)
