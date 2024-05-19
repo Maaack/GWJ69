@@ -30,9 +30,9 @@ signal ship_dove
 var target_reached_flag : bool = false
 var ship_loop_completed : bool = false
 
-@onready var _recording_times = recording_times
-@onready var _recording_streams = recording_streams
-@onready var _recording_transcripts = recording_transcripts
+@onready var _recording_times = recording_times.duplicate()
+@onready var _recording_streams = recording_streams.duplicate()
+@onready var _recording_transcripts = recording_transcripts.duplicate()
 @onready var _path_follow_node : PathFollow3D = %PathFollow3D
 @onready var _station_distance : float = primary_camera.position.distance_to(singularity.position)
 
