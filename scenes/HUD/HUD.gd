@@ -12,7 +12,12 @@ signal system_failed
 @export var lateral_thrust_panel : LateralThrustersPanel
 @export var log_panel : LogPanel
 
-func _ready():
+var booted : bool = false
+
+func boot():
+	if booted : return
+	booted = true
+	$BootingAnimationPlayer.play(&"Booting")
 	for hud_panel in hud_panels:
 		if hud_panel == null: continue
 		hud_panel.system_failed.connect(func(): system_failed.emit())

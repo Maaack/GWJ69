@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bmv8sswk6pfvc"]
+[gd_scene load_steps=33 format=3 uid="uid://bmv8sswk6pfvc"]
 
 [ext_resource type="Script" path="res://scenes/GameScene/GameUI.gd" id="1_jnhpe"]
 [ext_resource type="PackedScene" uid="uid://duj4lynj4vxua" path="res://scenes/WinScreen/ReturnScreen.tscn" id="2_0qyvn"]
@@ -16,6 +16,7 @@
 [ext_resource type="Shader" path="res://assets/shaders/chromatic_abberation.gdshader" id="11_f7lng"]
 [ext_resource type="PackedScene" uid="uid://qpcqlhjdngti" path="res://scenes/HUD/HUD.tscn" id="12_7rk1v"]
 [ext_resource type="AudioStream" uid="uid://ctl7ey8hww671" path="res://assets/sfx/SFX - 0036 - Audio - riser.ogg" id="14_5tj8j"]
+[ext_resource type="AudioStream" uid="uid://dvu75i8xs2qvp" path="res://assets/sfx/Horizon_VO1.mp3" id="17_224yn"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0s8hw"]
 
@@ -71,7 +72,7 @@ tracks/1/path = NodePath("HUDViewportContainer:material:shader_parameter/g_displ
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2, 3),
+"times": PackedFloat32Array(1, 3, 4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 1), Vector2(0, 0), Vector2(0, 0)]
@@ -83,7 +84,7 @@ tracks/2/path = NodePath("HUDViewportContainer:material:shader_parameter/b_displ
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2, 3),
+"times": PackedFloat32Array(1, 3, 4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(-6, 0), Vector2(-3, 0), Vector2(-1, 0)]
@@ -95,7 +96,7 @@ tracks/3/path = NodePath("ColorRect:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 8.5),
+"times": PackedFloat32Array(0, 8.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -111,6 +112,56 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ViewportContainer/ConfigurableSubViewport/GameWorld:ship_moving_flag")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect:color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0.411765)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("MarginContainer:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("HUDViewportContainer/SubViewport/HUD")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"boot"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_0egjo"]
@@ -175,12 +226,211 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ViewportContainer/ConfigurableSubViewport/GameWorld:ship_moving_flag")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect:color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("FirstRecordingPlayer:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("MarginContainer/TitleLabel:text")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [""]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("MarginContainer:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7kh0c"]
+resource_name = "Intro"
+length = 23.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ViewportContainer/ConfigurableSubViewport/GameWorld:ship_moving_flag")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HUDViewportContainer:material:shader_parameter/r_displacement")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HUDViewportContainer:material:shader_parameter/g_displacement")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HUDViewportContainer:material:shader_parameter/b_displacement")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("FirstRecordingPlayer:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("MarginContainer/TitleLabel:text")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.6, 2, 3.3, 5.3, 7, 8.8, 10.9, 12.6, 15.1, 16.1, 17.7, 18.5, 21),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["", "Generator check.", "Engines check.", "Radiators check.", "Safety systems check.", "All systems are go.", "And with that, I depart...", "Another overly curious scientist -", "- sacrificing themselves for humanity.", "With any luck, I'll be the last -", "- that'll ever need to.", "
+", "[END OF RECORDING]", "
+"]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("MarginContainer:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_btr5u"]
 _data = {
 "Booting": SubResource("Animation_1pdwj"),
+"Intro": SubResource("Animation_7kh0c"),
 "RESET": SubResource("Animation_0egjo")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7kgqm"]
+animation = &"Booting"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ys3im"]
+animation = &"Intro"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6whk1"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f0bxt"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yc17j"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_nqwhp"]
+states/Booting/node = SubResource("AnimationNodeAnimation_7kgqm")
+states/Booting/position = Vector2(633, 100)
+states/Intro/node = SubResource("AnimationNodeAnimation_ys3im")
+states/Intro/position = Vector2(398, 100)
+transitions = ["Start", "Intro", SubResource("AnimationNodeStateMachineTransition_6whk1"), "Intro", "Booting", SubResource("AnimationNodeStateMachineTransition_f0bxt"), "Booting", "End", SubResource("AnimationNodeStateMachineTransition_yc17j")]
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -250,15 +500,6 @@ horizontal_alignment = 1
 autowrap_mode = 2
 script = ExtResource("10_tfa3m")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.411765)
-
 [node name="HUDViewportContainer" type="SubViewportContainer" parent="."]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_efhyq")
@@ -280,16 +521,54 @@ render_target_update_mode = 4
 [node name="HUD" parent="HUDViewportContainer/SubViewport" instance=ExtResource("12_7rk1v")]
 unique_name_in_owner = true
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="BootingStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_5tj8j")
 volume_db = -10.0
 bus = &"SFX"
 
+[node name="FirstRecordingPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_224yn")
+bus = &"Voice"
+
 [node name="BootingAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_btr5u")
 }
-autoplay = "Booting"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_nqwhp")
+anim_player = NodePath("../BootingAnimationPlayer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 128
+
+[node name="TitleLabel" type="Label" parent="MarginContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [connection signal="distance_changed" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_distance_changed"]
 [connection signal="recording_recovered" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_recording_recovered"]
