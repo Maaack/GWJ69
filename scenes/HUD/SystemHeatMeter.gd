@@ -26,6 +26,8 @@ const MAX_COOLANT_LEVEL : int = 10
 @export var temperature : int = 0 :
 	set(value):
 		temperature = value
+		if temperature < 0:
+			temperature = 0
 		if is_inside_tree():
 			%HeatMeter.value = temperature
 		

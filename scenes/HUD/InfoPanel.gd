@@ -6,9 +6,8 @@ const INFO_STRING : String = "Mass: 150 Million Suns
 Radius: %s
 %s: %s
 Elapsed Time: 
-Local    -  %s
-Station  -  %s
-0.0015147628 sec/sec"
+Local   - %s
+Station - %s"
 
 const DISTANCE_STRING = "Distance"
 const DEPTH_STRING = "Depth"
@@ -70,7 +69,10 @@ func _get_km_string(km : float) -> String:
 
 func _get_time_string(elapsed_time : float) -> String:
 	if elapsed_time >= YEAR_SECONDS:
-		return "%.1f Years" % (elapsed_time / MONTH_SECONDS)
+		if elapsed_time >= 100.0:
+			return "%.f Years" % (elapsed_time / MONTH_SECONDS)
+		else:
+			return "%.1f Years" % (elapsed_time / MONTH_SECONDS)
 	elif elapsed_time >= MONTH_SECONDS:
 		return "%.1f Months" % (elapsed_time / MONTH_SECONDS)
 	elif elapsed_time >= DAY_SECONDS:

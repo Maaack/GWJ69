@@ -25,8 +25,9 @@ func _unhandled_input(event):
 func _on_game_world_distance_changed(distance_km):
 	%HUD.set_distance(distance_km)
 
-func _on_game_world_time_changed(local_time):
+func _on_game_world_time_changed(local_time, station_time):
 	%HUD.set_local_time(local_time)
+	%HUD.set_station_time(station_time)
 
 func _on_hud_system_failed():
 	_on_level_lost()

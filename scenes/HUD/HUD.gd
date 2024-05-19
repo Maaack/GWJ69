@@ -30,6 +30,9 @@ func set_distance(distance_km : float):
 func set_local_time(local_time : float):
 	info_panel.elapsed_local_time = local_time
 
+func set_station_time(station_time : float):
+	info_panel.elapsed_station_time = station_time
+
 func _on_heat_management_panel_coolant_pumping_changed(current_amount):
 	lateral_thrust_panel.drift_force_mod = 1.0 + (current_amount * pump_drift_mod)
 

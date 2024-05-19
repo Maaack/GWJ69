@@ -2,7 +2,7 @@
 extends Node3D
 
 signal distance_changed(distance_km : float)
-signal time_changed(local_time : float)
+signal time_changed(local_time : float, station_time : float)
 signal recording_recovered(transcript : String)
 signal target_reached
 signal ship_returned
@@ -23,7 +23,8 @@ signal ship_dove
 @export var edge_marker : Marker3D
 @export var schwarzschild_radius_km : float
 @export var ship_moving_flag : bool = false
-
+@export var galaxy_spin_rate : float = 0.0000001
+var galaxy_spin_rate_mod : float = .5
 
 var target_reached_flag : bool = false
 var ship_loop_completed : bool = false
@@ -32,11 +33,26 @@ var ship_loop_completed : bool = false
 @onready var _recording_streams = recording_streams
 @onready var _recording_transcripts = recording_transcripts
 @onready var _path_follow_node : PathFollow3D = %PathFollow3D
+@onready var _station_distance : float = primary_camera.position.distance_to(singularity.position)
 
 var elapsed_local_time : float :
 	set(value):
+		var time_delta = abs(value - elapsed_local_time)
 		elapsed_local_time = value
-		time_changed.emit(elapsed_local_time)
+		var station_time_delta = time_delta * _get_station_time_ratio()
+		elapsed_station_time += station_time_delta
+		_rotate_sky(station_time_delta)
+		time_changed.emit(elapsed_local_time, elapsed_station_time)
+
+var elapsed_station_time : float
+
+func _get_station_time_ratio() -> float:
+	var current_distance := primary_camera.position.distance_to(singularity.position)
+	var distance_ratio := current_distance / _station_distance
+	return pow(1.0 / (1.0 - sqrt(1 - distance_ratio)), 6)
+
+func _rotate_sky(delta : float):
+	$WorldEnvironment.environment.sky_rotation.y -= delta * galaxy_spin_rate * galaxy_spin_rate_mod
 
 func _play_next_event():
 	if _recording_streams.size() > 0 and _recording_times.size() > 0:
@@ -76,7 +92,7 @@ func _get_camera_focus_point() -> Vector3:
 	if camera_distance_ratio > 1.0:
 		return target_right_edge
 	else:
-		var min_ratio = 0.3
+		var min_ratio = 0.2
 		var final_ratio = (camera_distance_ratio - min_ratio) / (1 - min_ratio)
 		return lerp(target_reverse, target_right_edge, final_ratio)
 
