@@ -117,3 +117,9 @@ func heat_engine(amount : int):
 		if heat_meter is SystemHeatMeter:
 			if heat_meter.system_name == "Engine":
 				heat_meter.temperature += amount
+
+func heat_reactor(amount : int):
+	for heat_meter in heat_meter_container.get_children():
+		if heat_meter is SystemHeatMeter:
+			if heat_meter.system_name == "Reactor":
+				heat_meter.temperature += amount

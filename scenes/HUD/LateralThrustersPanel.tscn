@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bjj8pigxcav36"]
+[gd_scene load_steps=16 format=3 uid="uid://bjj8pigxcav36"]
 
 [ext_resource type="PackedScene" uid="uid://cim7s3ldpnh8t" path="res://scenes/HUD/HUDPanel.tscn" id="1_k7ieu"]
 [ext_resource type="Texture2D" uid="uid://c5yuxfvi6yv7w" path="res://assets/images/crosshair.svg" id="2_43m3u"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/HUD/LateralThrustersPanel.gd" id="2_wcvmv"]
 [ext_resource type="Texture2D" uid="uid://bxph7hbws1b2n" path="res://assets/images/plain-circle.svg" id="3_75ffm"]
 [ext_resource type="Texture2D" uid="uid://eglrxvqxgpc2" path="res://assets/images/arrow-left.svg" id="3_jw576"]
+[ext_resource type="Texture2D" uid="uid://dv811dixwllng" path="res://assets/images/electric.svg" id="3_phfd4"]
 [ext_resource type="Texture2D" uid="uid://beoofu414cyd5" path="res://assets/images/arrow-right.svg" id="4_2jnbh"]
 [ext_resource type="Texture2D" uid="uid://y2h135m1ajwt" path="res://assets/images/arrow-down.svg" id="5_u2mjl"]
 
@@ -29,6 +30,52 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5y4w7"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_show7"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 0.25098)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4x8af"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_detail = 1
+
 [node name="LateralThrustersPanel" instance=ExtResource("1_k7ieu")]
 script = ExtResource("2_wcvmv")
 target_offset = Vector2(0, 0)
@@ -42,8 +89,12 @@ engine_charge = 0
 engine_max_charge = 100
 engine_force_mod = 2.0
 engine_recharge_speed = 1
+engine_pump_amount = 2
 good_color = Color(0.0625162, 1, 0.0625162, 1)
 fine_color = Color(1, 1, 0.0627451, 1)
+
+[node name="MarginContainer" parent="." index="0"]
+theme_override_constants/margin_left = 14
 
 [node name="GridContainer2" type="GridContainer" parent="MarginContainer/Control" index="0"]
 layout_mode = 1
@@ -66,9 +117,32 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 32
+theme_override_constants/separation = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/HBoxContainer" index="0"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/Control/HBoxContainer" index="0"]
+layout_mode = 2
+
+[node name="EngineChargeBar" type="ProgressBar" parent="MarginContainer/Control/HBoxContainer/VBoxContainer3" index="0"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_styles/fill = SubResource("StyleBoxFlat_asvhi")
+fill_mode = 3
+
+[node name="PumpButton" type="Button" parent="MarginContainer/Control/HBoxContainer/VBoxContainer3" index="1"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_5y4w7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_show7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4x8af")
+theme_override_styles/focus = SubResource("StyleBoxFlat_show7")
+icon = ExtResource("3_phfd4")
+expand_icon = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/HBoxContainer" index="1"]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -164,16 +238,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="EngineChargeBar" type="ProgressBar" parent="MarginContainer/Control/HBoxContainer" index="1"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(32, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_styles/fill = SubResource("StyleBoxFlat_asvhi")
-fill_mode = 3
-
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/Control/HBoxContainer" index="2"]
 layout_mode = 2
 theme_override_constants/separation = 12
@@ -186,12 +250,15 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "Lateral thrusters help keep
-the ship on course.
+the ship on course. but usage
+raises the temperature of the
+engines.
 
-Usage raises the temperature
-of the engines.
-
-They recharge when not used."
+Engines recharge when not used.
+They can also be recharged
+with the manual pump, but that
+raises the temperature of the
+reactor."
 mouse_filter = 0
 mouse_default_cursor_shape = 16
 theme_type_variation = &"GameTipLabel"
@@ -225,6 +292,7 @@ autostart = true
 wait_time = 3.0
 one_shot = true
 
+[connection signal="pressed" from="MarginContainer/Control/HBoxContainer/VBoxContainer3/PumpButton" to="." method="_on_pump_button_pressed"]
 [connection signal="button_down" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/UpButton" to="." method="_on_up_button_button_down"]
 [connection signal="button_up" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/UpButton" to="." method="_on_up_button_button_up"]
 [connection signal="pressed" from="MarginContainer/Control/HBoxContainer/VBoxContainer/GridContainer/UpButton" to="." method="_on_up_button_pressed"]

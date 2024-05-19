@@ -128,6 +128,7 @@ hud_panels = [NodePath("VBoxContainer/HBoxContainer/InfoPanel"), NodePath("VBoxC
 panel_boot_delay = 1.0
 pump_drift_mod = 0.1
 engine_heat_amount = 4
+reactor_heat_amount = 16
 info_panel = NodePath("VBoxContainer/HBoxContainer/InfoPanel")
 heat_management_panel = NodePath("VBoxContainer/HBoxContainer/HeatManagementPanel")
 lateral_thrust_panel = NodePath("VBoxContainer/HBoxContainer2/LateralThrustersPanel")
@@ -214,3 +215,4 @@ autoplay = "Booting"
 [connection signal="coolant_flushed" from="VBoxContainer/HBoxContainer/HeatManagementPanel" to="." method="_on_heat_management_panel_coolant_flushed"]
 [connection signal="coolant_pumping_changed" from="VBoxContainer/HBoxContainer/HeatManagementPanel" to="." method="_on_heat_management_panel_coolant_pumping_changed"]
 [connection signal="engine_heated" from="VBoxContainer/HBoxContainer2/LateralThrustersPanel" to="." method="_on_lateral_thrusters_panel_engine_heated"]
+[connection signal="reactor_heated" from="VBoxContainer/HBoxContainer2/LateralThrustersPanel" to="." method="_on_lateral_thrusters_panel_reactor_heated"]

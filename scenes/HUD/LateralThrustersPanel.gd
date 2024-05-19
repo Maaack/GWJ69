@@ -3,6 +3,7 @@ class_name LateralThrustersPanel
 extends HUDPanel
 
 signal engine_heated
+signal reactor_heated
 
 const WALK_DIRECTION_CHANGE_CHANCE : float = 0.1
 
@@ -46,6 +47,7 @@ const WALK_DIRECTION_CHANGE_CHANCE : float = 0.1
 
 @export var engine_force_mod : float = 1.0
 @export var engine_recharge_speed : int = 1
+@export var engine_pump_amount : int = 1
 @export var good_color : Color
 @export var fine_color : Color
 
@@ -171,3 +173,7 @@ func _on_recharge_tick_timer_timeout():
 
 func _on_flush_drift_timer_timeout():
 	flushing = false
+
+func _on_pump_button_pressed():
+	engine_charge += engine_pump_amount
+	reactor_heated.emit()

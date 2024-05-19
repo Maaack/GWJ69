@@ -5,7 +5,8 @@ signal system_failed
 @export var hud_panels : Array[HUDPanel]
 @export var panel_boot_delay : float = 0.0
 @export var pump_drift_mod : float = 0.0
-@export var engine_heat_amount : int = 0
+@export var engine_heat_amount : int = 1
+@export var reactor_heat_amount : int = 1
 @export var info_panel : InfoPanel
 @export var heat_management_panel : HeatManagementPanel
 @export var lateral_thrust_panel : LateralThrustersPanel
@@ -34,6 +35,9 @@ func _on_heat_management_panel_coolant_pumping_changed(current_amount):
 
 func _on_lateral_thrusters_panel_engine_heated():
 	heat_management_panel.heat_engine(engine_heat_amount)
+
+func _on_lateral_thrusters_panel_reactor_heated():
+	heat_management_panel.heat_reactor(reactor_heat_amount)
 
 func read_transcript(transcript : String):
 	log_panel.add_recording(transcript)
