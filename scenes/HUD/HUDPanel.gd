@@ -33,7 +33,7 @@ func _ready():
 	$CoverPanel.theme_type_variation = theme_type_variation
 
 func _on_booting_animation_player_animation_finished(anim_name : StringName):
-	if anim_name.find("Boot") != -1:
+	if anim_name.find("Booting") != -1:
 		booted = true
 
 func _update_panel():

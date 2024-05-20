@@ -163,6 +163,18 @@ tracks/8/keys = {
 "method": &"boot"
 }]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SkipLabel:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_0egjo"]
 length = 0.001
@@ -286,10 +298,22 @@ tracks/9/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("SkipLabel:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_7kh0c"]
 resource_name = "Intro"
-length = 23.0
+length = 21.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -570,6 +594,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="SkipLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -61.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press again to skip."
+horizontal_alignment = 1
+
 [connection signal="distance_changed" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_distance_changed"]
 [connection signal="recording_recovered" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_recording_recovered"]
 [connection signal="ship_dove" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_ship_dove"]
@@ -577,3 +614,5 @@ autowrap_mode = 2
 [connection signal="target_reached" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_target_reached"]
 [connection signal="time_changed" from="ViewportContainer/ConfigurableSubViewport/GameWorld" to="." method="_on_game_world_time_changed"]
 [connection signal="system_failed" from="HUDViewportContainer/SubViewport/HUD" to="." method="_on_hud_system_failed"]
+[connection signal="animation_finished" from="BootingAnimationPlayer" to="." method="_on_booting_animation_player_animation_finished"]
+[connection signal="current_animation_changed" from="BootingAnimationPlayer" to="." method="_on_booting_animation_player_current_animation_changed"]

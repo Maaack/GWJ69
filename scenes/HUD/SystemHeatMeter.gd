@@ -37,6 +37,8 @@ const MAX_COOLANT_LEVEL : int = 10
 		if is_inside_tree():
 			%HeatMeter.max_value = max_temperature
 
+@export var enabled : bool = false
+
 var shortened_name : String :
 	set(value):
 		shortened_name = value
@@ -55,4 +57,5 @@ func _ready():
 	system_name = system_name
 
 func _on_tick_timer_timeout():
+	if not enabled: return
 	temperature += heat_level - coolant_level

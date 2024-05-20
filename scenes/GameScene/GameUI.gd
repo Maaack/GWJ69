@@ -10,6 +10,22 @@ enum GameChoice{
 @export var lose_scene : PackedScene
 @export var decision_scene : PackedScene
 
+var intro_done : bool = false
+var skip_pressed_once : bool = false
+
+func _unhandled_input(event):
+	if event.is_action_pressed(&"ui_accept") \
+	or event.is_action_pressed(&"ui_select"):
+		if intro_done : return
+		if not skip_pressed_once:
+			skip_pressed_once = true
+			$SkipLabel.show()
+		else:
+			var animation_state_machine : AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
+			animation_state_machine.start(&"Booting")
+	if event.is_action_pressed(&"ui_hide"):
+		%HUDViewportContainer.visible = !%HUDViewportContainer.visible
+
 func _ready():
 	InGameMenuController.scene_tree = get_tree()
 	if Input.is_action_pressed(&"ui_console"):
@@ -17,10 +33,6 @@ func _ready():
 
 func _on_level_lost():
 	InGameMenuController.open_menu(lose_scene, get_viewport())
-
-func _unhandled_input(event):
-	if event.is_action_pressed(&"ui_hide"):
-		%HUDViewportContainer.visible = !%HUDViewportContainer.visible
 
 func _on_game_world_distance_changed(distance_km):
 	%HUD.set_distance(distance_km)
@@ -36,11 +48,8 @@ func _on_game_choice_made(choice : int):
 	InGameMenuController.close_menu()
 	match(choice):
 		GameChoice.LEAP:
-			print("chose leap")
 			%GameWorld.leap()
-			pass
 		GameChoice.RETURN:
-			print("chose return")
 			pass
 
 func _on_load_game_decision():
@@ -60,3 +69,10 @@ func _on_game_world_ship_dove():
 func _on_game_world_recording_recovered(transcript):
 	%HUD.read_transcript(transcript)
 
+func _on_booting_animation_player_animation_finished(anim_name):
+	if anim_name.find("Intro") != -1:
+		intro_done = true
+
+func _on_booting_animation_player_current_animation_changed(name):
+	if name.find("Booting") != -1:
+		intro_done = true

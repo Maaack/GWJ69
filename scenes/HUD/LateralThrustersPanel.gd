@@ -124,6 +124,7 @@ func _update_state():
 		state = States.SAFE
 
 func _on_tick_timer_timeout():
+	if not booted: return
 	_update_state()
 	var desired_charge = round(thrust_vector.length())
 	if desired_charge > 0 and engine_charge > desired_charge:
@@ -132,6 +133,7 @@ func _on_tick_timer_timeout():
 		engine_heated.emit()
 
 func _on_drift_tick_timer_timeout():
+	if not booted: return
 	var x_noise_pixel = _get_x_noise_pixel()
 	var y_noise_pixel = _get_y_noise_pixel()
 	var x_effect = (noise_image.get_pixelv(x_noise_pixel).r * 2) - 1

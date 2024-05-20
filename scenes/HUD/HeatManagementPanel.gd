@@ -38,6 +38,12 @@ func meter_returns_coolant(heat_meter : SystemHeatMeter):
 		coolant_reserve += 1
 		coolant_pumping -= 1
 
+func boot():
+	super.boot()
+	for heat_meter in heat_meter_container.get_children():
+		if heat_meter is SystemHeatMeter:
+			heat_meter.enabled = true
+
 func _ready():
 	super._ready()
 	coolant_reserve = coolant_reserve
